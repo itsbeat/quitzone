@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get("/surveys", [SurveyController::class, "list"]);
+Route::post("/surveys", [SurveyController::class, "create"]);
