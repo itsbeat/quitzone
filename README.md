@@ -3,18 +3,21 @@ Repo Quitzz
 
 Descrizione Progetto Quitzone
 Applicazione realizzata in Laravel e VueJS con database SQL per la gestione, creazione, correzzione di questionari ed esami.
+
 Team di sviluppo BackEnd:
 - Michipase
 - MattiaElmoro
 - Acqua di Giò
 - FedeCrack
 - ScompaElGinger
+
 Team di sviluppo FrontEnd:
 - Erik
 - Macs
 - Bose
 - Galiotz
 - Zalzzillo
+
 Team di GraphicDesign:
 - Jellyfisha
 - DavideGaspa
