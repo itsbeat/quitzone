@@ -13,7 +13,7 @@ class CreateExamSurveysTable extends Migration
      */
     public function up()
     {
-        Schema::create('exam_surveys', function (Blueprint $table) {
+        Schema::create('exam_survey', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
