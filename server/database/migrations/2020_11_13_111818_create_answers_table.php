@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddFieldsToChoices extends Migration
+class CreateAnswersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class AddFieldsToChoices extends Migration
      */
     public function up()
     {
-        Schema::table('choices', function (Blueprint $table) {
-            $table->bigInteger("question_id")->unsigned()->nullable();
-            $table->foreign("question_id")->references("id")->on("questions")->onDelete("cascade");
+        Schema::create('answers', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -26,8 +26,6 @@ class AddFieldsToChoices extends Migration
      */
     public function down()
     {
-        Schema::table('choices', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('answers');
     }
 }
