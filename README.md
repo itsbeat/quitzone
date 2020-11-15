@@ -19,6 +19,7 @@ Team di sviluppo FrontEnd:
 - Zalzzillo
 
 Team di GraphicDesign:
+- Suddiviso in Corporate identity e Mockups
 - Jellyfisha
 - DavideGaspa
 - EmaDamiano
