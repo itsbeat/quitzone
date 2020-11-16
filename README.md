@@ -18,10 +18,13 @@ Team di sviluppo FrontEnd:
 - Galiotz
 - Zalzzillo
 
-Team di GraphicDesign:
-- Suddiviso in Corporate identity e Mockups
+Team di GraphicDesign Corporate Identity:
+- MatteoIndraccolo
 - Jellyfisha
 - DavideGaspa
+
+Team di GraphicDesign Mockups:
+- NicolaHu
 - EmaDamiano
 - AlbertoB
 
