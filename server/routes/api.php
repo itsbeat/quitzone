@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\SurveyController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::get("/surveys", [SurveyController::class, "list"]);
-Route::post("/surveys", [SurveyController::class, "create"]);
+
+Route::post("/login",[AuthController::class,"login"]);
+
+Route::group(["middleware"=> "auth.api"],function(){
+    Route::post("/logout",[AuthController::class,"logout"]);
+    Route::get("/surveys", [SurveyController::class, "list"]);
+    Route::post("/surveys", [SurveyController::class, "create"]);
+});

@@ -1,17 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <form @submit.prevent="login()">
+      <input type="text" v-model = "email">
+      <input type="password" v-model = "password">
+      <button>Login</button>
+    </form>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import axios from "axios";
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data(){
+    return {
+      email: null,
+      password:null,
+    };
+  },
+  methods:{
+      async login(){
+        let response = await axios.post("http://127.0.0.1:8000/api/login",{
+          email:this.email,
+          password:this.password,
+        });
+        console.log(response);
+      }
   }
 }
 </script>

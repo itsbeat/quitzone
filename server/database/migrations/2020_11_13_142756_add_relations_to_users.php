@@ -14,7 +14,7 @@ class AddRelationsToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer("info_id");
+            $table->bigInteger("info_id")->nullable();
             $table->bigInteger("role_id")->unsigned()->nullable();
             $table
                 ->foreign("role_id")
