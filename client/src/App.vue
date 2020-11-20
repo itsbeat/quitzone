@@ -5,6 +5,8 @@
       <input type="password" v-model = "password">
       <button>Login</button>
     </form>
+    
+    <button @click="logout()" > Logout</button>
   </div>
 </template>
 
@@ -28,7 +30,13 @@ export default {
         });
 
         console.log(response.data);
-      }
+      },
+
+      async logout(){
+         let response = await axios.post("http://localhost:8000/api/logout");
+         
+        console.log(response.data);
+      },
   }
 }
 </script>

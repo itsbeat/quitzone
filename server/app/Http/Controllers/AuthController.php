@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Laravel\Passport\Bridge\AccessToken;
+use Laravel\Passport\Token;
 
 class AuthController extends Controller
 {
@@ -33,7 +35,15 @@ class AuthController extends Controller
         }
     }
 
-    public function logout() {
-        
+    public function logout (Request $request){ 
+        $request->user()->token()->revoke();
+        $cookie = Cookie::forget('sessionToken');
+        return response()
+            ->json([
+                "message" => "logout_ok"
+            ], 200)
+            ->withCookie($cookie);
     }
+        
+    
 }

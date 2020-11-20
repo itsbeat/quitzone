@@ -4,6 +4,7 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+
 class Kernel extends HttpKernel
 {
     /**
@@ -43,8 +44,19 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+
+
+        'auth.api' =>[
+            \App\Http\Middleware\AddAuthHeader::class,
+            "auth:api"
+        ]
     ];
 
+    protected $middlewarePriority = [
+        \App\Http\Middleware\AddAuthHeader::class,
+        \App\Http\Middleware\Authenticate::class,
+    ];
+    
     /**
      * The application's route middleware.
      *
