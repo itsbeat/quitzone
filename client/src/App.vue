@@ -10,6 +10,8 @@
 
 <script>
 import axios from "axios";
+axios.defaults.withCredentials = true;
+
 export default {
   name: 'App',
   data(){
@@ -20,11 +22,12 @@ export default {
   },
   methods:{
       async login(){
-        let response = await axios.post("http://127.0.0.1:8000/api/login",{
+        let response = await axios.post("http://localhost:8000/api/login",{
           email:this.email,
           password:this.password,
         });
-        console.log(response);
+
+        console.log(response.data);
       }
   }
 }
