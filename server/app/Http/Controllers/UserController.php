@@ -32,4 +32,8 @@ class UserController extends Controller
     public function list() {
         return User::get();
     }
+
+    public function getUser($id) {
+        return User::where("id",$id);
+    }
 }

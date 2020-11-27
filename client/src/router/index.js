@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Students from '../views/Students.vue';
 import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
+import StudentsEdit from '../views/StudentsEdit.vue';
 
 
 Vue.use(VueRouter)
@@ -29,6 +30,11 @@ const routes = [
         path: 'create',
         name: 'students_create',
         component: StudentsCreate,
+      },
+      {
+        path: 'edit',
+        name: 'students_edit',
+        component: StudentsEdit,
       },
       {
         path: '',
