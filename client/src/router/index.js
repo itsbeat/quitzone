@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+//import StudentRegister from '../views/StudentRegister.vue';
+import Students from '../views/Students.vue';
+import StudentsCreate from '../views/StudentsCreate.vue';
+import StudentsList from '../views/StudentsList.vue';
 
-import Its from  '../views/Its.vue'
-import ItsView from '../views/ItsView.vue';
-import ItsList from '../views/ItsList.vue';
-import ItsCreate from '../views/ItsCreate.vue';
 
 Vue.use(VueRouter)
 
@@ -17,39 +16,25 @@ const routes = [
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
-    component: About
-  },
-  {
-    path: '/its',
-    name: 'ITS',
-    component: Its,
+    path: '/students',
+    name: 'students',
+    component: Students,    
     children: [
       {
         path: 'list',
-        name: "its_list",
-        component: ItsList,
-      },
-      {
-        path: 'view/:id',
-        name: 'its_view',
-        component: ItsView,
+        name: "students_list",
+        component: StudentsList,
       },
       {
         path: 'create',
-        name: 'its_create',
-        component: ItsCreate,
+        name: 'students_create',
+        component: StudentsCreate,
       },
       {
         path: '',
         redirect: 'list'
       }
-    ]
-  },
-  {
-    path: '',
-    redirect: 'about'
+    ] 
   },
   {
     path: '*',
