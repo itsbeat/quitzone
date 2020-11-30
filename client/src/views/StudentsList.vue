@@ -1,7 +1,7 @@
 <template>
   <div>
      <router-view></router-view>
-    <table>
+    <table class="text-center">
       <tr>
         <th>Nome</th>
         <th>Azioni</th>
