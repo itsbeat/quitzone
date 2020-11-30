@@ -53,11 +53,11 @@ const routes = [
       { // Qua ci andrebbe l'id singolo -> TODO
         path: 'students_details',
         name: "teachers_students_details",
-        component: Teachers,
+        component: TeachersStudentsDetails,
       },
       {
         path: '',
-        redirect: 'teachers'
+        redirect: 'students_details'
       }
     ] 
   },
