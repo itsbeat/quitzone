@@ -10,7 +10,7 @@
         <td>{{ user.name }}</td>
         <td>
           <!-- <a @click="viewUser(user.id)"> Dettaglio </a> -->
-          <a @click="editUser(user.id)"> 🖊️ </a>
+          <a class="cursor-pointer"  @click="editUser(user.id)"> 🖊️ </a>
         </td>
       </tr>
     </table>

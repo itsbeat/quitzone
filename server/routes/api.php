@@ -22,9 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::post("/login",[AuthController::class,"login"]);
 Route::post("/users", [UserController::class, "create"]);
 Route::get("/users", [UserController::class, "list"]);
-
 Route::get("/users/{id}", [UserController::class, "getUser"]);
-
+Route::put("/users/{id}", [UserController::class, "editUser"]);
 
 Route::group(["middleware"=> "auth.api"],function(){
     Route::post("/logout",[AuthController::class,"logout"]);

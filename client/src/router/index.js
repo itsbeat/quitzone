@@ -32,7 +32,7 @@ const routes = [
         component: StudentsCreate,
       },
       {
-        path: 'edit',
+        path: 'edit/:id',
         name: 'students_edit',
         component: StudentsEdit,
       },
