@@ -6,6 +6,9 @@ import Students from '../views/Students.vue';
 import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
+import Teachers from '../views/Teachers.vue';
+import TeachersStudentsDetails from '../views/TeachersStudentsDetails';
+
 
 
 Vue.use(VueRouter)
@@ -39,6 +42,22 @@ const routes = [
       {
         path: '',
         redirect: 'list'
+      }
+    ] 
+  },
+  {
+    path: '/teachers',
+    name: 'teachers',
+    component: Teachers,    
+    children: [
+      { // Qua ci andrebbe l'id singolo -> TODO
+        path: 'students_details',
+        name: "teachers_students_details",
+        component: Teachers,
+      },
+      {
+        path: '',
+        redirect: 'teachers'
       }
     ] 
   },
