@@ -2,10 +2,11 @@
   <div id="navbar" class="bg-white">
     <nav class="h-16 text-white bg-teal-600 flex items-center shadow">
         <div class="flex items-center flex-no-shrink text-white mr-6">
-      <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-      <span class="font-semibold text-xl tracking-tight">Quitzone</span>
-    </div>
-        <div class="container mx-auto px-4">
+      <img src="logo_quitzone.png" class="fill-current h-200 w-300 ml-32" width="200" height="320" >
+      
+    
+        </div>
+        <div class="container mx-auto px-52 ml-44">
             <div class="flex justify-between items-center">
                 <div class="flex">
                     <a href="#" class="text-blue-dark  font-semibold rounded-lg px-4 py-2 | hover:bg-grey-light hover:text-white-normal">
@@ -27,7 +28,6 @@
                                 @click="isOpen2 = true">
                             <img src="https://i.pravatar.cc/150?u=1" alt="">
                         </button>
-
                         <div v-if="isOpen2" class="fixed inset-0 w-full h-screen z-20 bg-black opacity-25" @click="isOpen2 = false"></div>
                         <div class="absolute z-30 right-0 mt-2" :class="{'hidden': !isOpen2}">
                             <div class="bg-white rounded-lg shadow-lg py-2 w-48">
