@@ -29,7 +29,7 @@
                   <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
                     <a href="#" class="text-indigo-600 hover:text-indigo-900">15/100</a>
                   </td>      
-
+                  
                   <tr>
                   <td> Cyber Security </td>
                   <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 30 </td>
