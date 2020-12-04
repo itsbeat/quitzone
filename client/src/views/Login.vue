@@ -1,20 +1,41 @@
 <template>
-<div class="wrapper">
-  <div>DEVI FARE IL LOGIN, COGLIONE!</div>
-  <button>login</button>
-  <button>logout</button>
-</div>
+    <div class="wrapper" v-on:submit.prevent>
+    <h1>Login</h1>
+    <label for="email">Email</label>
+    <input type="text" v-model="email">
+    <label for="password">Password</label>
+    <input type="password" v-model="password">
+
+    <button @click="login()">Login</button>
+    <button>Logout</button>
+    </div>
 </template>
 
 <script>
+    import api from '../services/api'
+    export default {
+        name: "Login",
+        data() {
+            return {
+                email: null,
+                password: null,
+            };
+        },
+        mounted() {},
+        methods: {
+            async login() {
+                try {
+                    let response = await api.post('/login', {
+                    email: this.email,
+                    password: this.password,
+                    });
+                    console.log(response);
 
-export default {
-  name: "Login",
-  data() {
-    return {};
-  },
-  mounted() {},
-  methods: {},
-  computed: {}
-}
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+        },
+        computed: {}
+    }
 </script>
