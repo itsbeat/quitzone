@@ -11,7 +11,7 @@
                 <div class="flex">
                     <a href="#"
                         @click="gotoSection(route,index)" 
-                        v-for="(route,index) in visibleRoutes" 
+                        v-for="(route,index) in visibleRoutes"
                         :key="index" 
                         class="font-semibold px-1 py-1 mx-3"
                         :class="{
@@ -59,12 +59,13 @@ export default {
   mounted() {
       console.log(this.$router.options.routes);
       this.selectRouteIndex= 0;
-
   },
   methods: {
     gotoSection(route,index){
-        console.log(route);
         this.selectRouteIndex = index;
+        this.$router.push({
+            name: route.name
+        });
     },
   },
   computed: {
