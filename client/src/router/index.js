@@ -7,6 +7,8 @@ import Its from  '../views/Its.vue'
 import ItsView from '../views/ItsView.vue';
 import ItsList from '../views/ItsList.vue';
 import ItsCreate from '../views/ItsCreate.vue';
+import Esame from '../views/Esame.vue';
+
 
 Vue.use(VueRouter)
 
@@ -55,6 +57,11 @@ const routes = [
     path: '*',
     redirect: 'home'
   },
+  {
+    path: '/esame',
+    name: 'esame',
+    component: Esame
+  }
 ]
 
 const router = new VueRouter({
