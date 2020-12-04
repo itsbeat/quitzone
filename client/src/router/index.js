@@ -7,7 +7,8 @@ import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Teachers from '../views/Teachers.vue';
-import TeachersStudentsDetails from '../views/TeachersStudentsDetails';
+import StudentsDetailsExams from '../views/StudentsDetailsExams';
+import StudentsDetailsQuizzes from '../views/StudentsDetailsQuizzes';
 
 
 
@@ -39,6 +40,16 @@ const routes = [
         name: 'students_edit',
         component: StudentsEdit,
       },
+      { // Qua ci andrebbe l'id singolo -> TODO
+        path: 'details_exams',
+        name: "students_details_exams",
+        component: StudentsDetailsExams,
+      },
+      { // Qua ci andrebbe l'id singolo -> TODO
+        path: 'details_quizzes',
+        name: "students_details_quizzes",
+        component: StudentsDetailsQuizzes,
+      },
       {
         path: '',
         redirect: 'list'
@@ -50,15 +61,6 @@ const routes = [
     name: 'teachers',
     component: Teachers,    
     children: [
-      { // Qua ci andrebbe l'id singolo -> TODO
-        path: 'students_details',
-        name: "teachers_students_details",
-        component: TeachersStudentsDetails,
-      },
-      {
-        path: '',
-        redirect: 'students_details'
-      }
     ] 
   },
   {
