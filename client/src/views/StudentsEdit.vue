@@ -30,7 +30,6 @@
     </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
   name: "students_edit",
@@ -58,15 +57,13 @@ export default {
   },
   methods: {
     async editUser() {
-        let response = await axios.put(
-          "http://localhost:8000/api/users/" + this.userId,
-          this.editUserTemplate);
+        let response = await this.$api.put('/users/' + this.userId, this.editUserTemplate);
         console.log(response);
     }
   },
   async mounted() {
     this.userId = this.$route.params.id;
-    let response = await axios.get(`http://localhost:8000/api/users/${this.userId}`);
+    let response = await this.$api.get(`/users/${this.userId}`);
     this.user = response.data; 
     this.editUserTemplate.name = this.user.name;
     this.editUserTemplate.email = this.user.email;
