@@ -28,11 +28,8 @@
                     <th scope="col" class="px-3 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Risposte Sbagliate</th>
                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Voto Finale</th>
                   </tr>
-                        <!-- <tr v-for="user in users" :key="user.id"> -->
-                        <!-- <td>{{ user.name }}</td> -->
-                        <!-- <a @click="viewUser(user.id)"> Dettaglio </a> -->
-                        <!-- <a class="cursor-pointer"  @click="editUser(user.id)"> 🖊️ </a> -->
-                  <td> v-for="user in users" :key="user.id" </td>
+                      
+                  <td>  </td>
                   <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 30 </td>
                   <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 20 </td>
                   <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 10 </td>
@@ -52,27 +49,23 @@
 <script>
 //import axios from "axios";
 
-export default {
-name: "TeachersStudentsDetailsExams",
-  data() {
-    return {
-      users: []
-    };
-  },
-  // async mounted() {
-  //   let response = await axios.get("http://localhost:8000/api/users");
-  //   this.users = response.data;
-  // },
-  //methods: {
-  //   editUser(userId) {
-  //     this.$router.push({
-  //       name: "",
-  //       params: {
-  //         id: userId
-  //       },
-  //     });
-  //   }
-  // }
-  };
-</script>
-<style></style>
+// export default {
+// name: "StudentsDetailsQuizzes",
+//   data() {
+//   // async mounted() {
+//   //   let response = await axios.get("QUA VA L'INDIRIZZO BACKEND PER PESCARE I QUIZ SVOLTI DALL'UTENTE{ID}");
+//   //   this.users = response.data;
+//   // },
+//   //methods: {
+//   //   editUser(userId) {
+//   //     this.$router.push({
+//   //       name: "",
+//   //       params: {
+//   //         id: userId
+//   //       },
+//   //     });
+//   //   }
+//   // }
+//   };
+// </script>
+// <style></style>

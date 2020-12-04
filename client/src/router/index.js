@@ -40,12 +40,12 @@ const routes = [
         name: 'students_edit',
         component: StudentsEdit,
       },
-      { // Qua ci andrebbe l'id singolo -> TODO
+      { // Qua ci andrebbe l'id singolo -> details_exams/:id
         path: 'details_exams',
         name: "students_details_exams",
         component: StudentsDetailsExams,
       },
-      { // Qua ci andrebbe l'id singolo -> TODO
+      { // Qua ci andrebbe l'id singolo -> details_quizzes/:id
         path: 'details_quizzes',
         name: "students_details_quizzes",
         component: StudentsDetailsQuizzes,

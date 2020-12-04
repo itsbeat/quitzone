@@ -52,7 +52,7 @@
 //import axios from "axios";
 
 export default {
-name: "TeachersStudentsDetailsExams",
+name: "StudentsDetailsExams",
   data() {
     return {
       users: []

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <pre>{{ user }}</pre>
         <div v-for="field in fields" :key="field.name">
               <div class="grid grid-cols-3 col-gap-5 mb-4">
                 <label class="font-bold" :for="field.name">{{ field.label }}</label>
