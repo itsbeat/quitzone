@@ -6,6 +6,7 @@ import Students from '../views/Students.vue';
 import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
+import Login from '../views/Login.vue';
 
 
 Vue.use(VueRouter)
@@ -41,6 +42,11 @@ const routes = [
         redirect: 'list'
       }
     ] 
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
     path: '*',
