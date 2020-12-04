@@ -9,18 +9,19 @@
         <div class="container mx-auto px-52 ml-44">
             <div class="flex justify-between items-center">
                 <div class="flex">
-                    <a href="#" class="text-blue-dark  font-semibold rounded-lg px-4 py-2 | hover:bg-grey-light hover:text-white-normal">
-                        Home
+                    <a href="#"
+                        @click="gotoSection(route,index)" 
+                        v-for="(route,index) in visibleRoutes" 
+                        :key="index" 
+                        class="font-semibold px-1 py-1 mx-3"
+                        :class="{
+                            ' text-blue-dark border-b-2': selectRouteIndex == index,
+                            'text-gray-200': selectRouteIndex != index,
+                        }"
+                    >
+                        {{route.meta.label}}
                     </a>
-                    <a href="#" class="text-grey-dark font-semibold rounded-lg px-4 py-2 | hover:bg-grey-light hover:text-white-normal">
-                        Classi
-                    </a>
-                    <a href="#" class="text-grey-dark  font-semibold rounded-lg px-4 py-2 | hover:bg-grey-light hover:text-white-normal">
-                        Esami
-                    </a>
-                    <a href="#" class="text-grey-dark font-semibold rounded-lg px-4 py-2 | hover:bg-grey-light hover:text-white-normal">
-                        Quiz
-                    </a>
+                   
                 </div>
                 <div class="flex">
                     <div class="relative">
@@ -31,9 +32,9 @@
                         <div v-if="isOpen2" class="fixed inset-0 w-full h-screen z-20 bg-black opacity-25" @click="isOpen2 = false"></div>
                         <div class="absolute z-30 right-0 mt-2" :class="{'hidden': !isOpen2}">
                             <div class="bg-white rounded-lg shadow-lg py-2 w-48">
-                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-white-normal hover:bg-grey-light">Profilo</a>
-                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-white-normal hover:bg-grey-light">Impostazioni</a>
-                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-white-normal hover:bg-grey-light">Log out</a>
+                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Profilo</a>
+                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Impostazioni</a>
+                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Log out</a>
                             </div>
                         </div>
                     </div>
@@ -50,12 +51,33 @@ export default {
     return {
         isOpen1: true,
         isOpen2: false,
+        routes: [],
+        selectRouteIndex: -1,
+
     };
   },
-  mounted() {},
-  methods: {
+  mounted() {
+      console.log(this.$router.options.routes);
+      this.selectRouteIndex= 0;
+
   },
-  computed: {}
+  methods: {
+    gotoSection(route,index){
+        console.log(route);
+        this.selectRouteIndex = index;
+    },
+  },
+  computed: {
+      visibleRoutes(){
+          return this.$router.options.routes.filter((route) => {
+              //funzione per filtrare ogni elemento dell'array
+              if(route.meta && route.meta.label){
+                  return true;
+              }
+              return false;
+          });
+      }
+  },
 };
 </script>
 <style></style>
