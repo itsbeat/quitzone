@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SurveyController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
@@ -29,6 +30,10 @@ Route::put("/users/{id}", [UserController::class, "editUser"]);
 
 Route::get("/classrooms", [ClassroomController::class, "list"]);
 Route::get("/classrooms/{id}", [ClassroomController::class, "getStudents"]);
+Route::post("/classrooms/add", [ClassroomController::class, "createClassroom"]);
+Route::put("/classrooms/edit", [ClassroomController::class, "editClassroom"]);
+
+Route::post("/students/add", [StudentController::class, "createStudent"]);
 
 Route::group(["middleware"=> "auth.api"],function(){
     Route::post("/logout",[AuthController::class,"logout"]);

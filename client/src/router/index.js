@@ -4,13 +4,15 @@ import Home from '../views/Home.vue'
 //import StudentRegister from '../views/StudentRegister.vue';
 
 import Students from '../views/Students.vue';
-import StudentsCreate from '../views/StudentsCreate.vue';
+import StudentsAdd from '../views/StudentsAdd.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 
 import Classrooms from '../views/Classrooms.vue';
 import ClassroomsView from '../views/ClassroomsView.vue';
 import ClassroomsList from '../views/ClassroomsList.vue';
+import ClassroomsAdd from '../views/ClassroomsAdd.vue';
+import ClassroomsEdit from '../views/ClassroomsEdit.vue';
 
 
 Vue.use(VueRouter)
@@ -32,9 +34,9 @@ const routes = [
         component: StudentsList,
       },
       {
-        path: 'create',
-        name: 'students_create',
-        component: StudentsCreate,
+        path: 'add/:id',
+        name: 'students_add',
+        component: StudentsAdd,
       },
       {
         path: 'edit/:id',
@@ -58,15 +60,20 @@ const routes = [
         component: ClassroomsList,
       },
       {
-        path: ':id',
+        path: 'view/:id',
         name: "classrooms_view",
         component: ClassroomsView,
       },
-      // {
-      //   path: 'create',
-      //   name: 'classrooms_create',
-      //   component: ClassroomsCreate,
-      // },
+      {
+        path: 'add',
+        name: 'classrooms_add',
+        component: ClassroomsAdd,
+      },
+      {
+        path: 'edit/:id',
+        name: 'classrooms_edit',
+        component: ClassroomsEdit,
+      },
       {
         path: '',
         redirect: 'list'

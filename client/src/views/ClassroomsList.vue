@@ -2,7 +2,10 @@
   <div>
      <router-view></router-view>
      <div class="mx-80 flex flex-col justify-center">
-      <h1 class="py-20 uppercase font-bold">Le mie classi</h1>
+     <div class="flex justify-between items-center">
+        <h1 class="py-20 uppercase font-bold">Le mie classi</h1>
+        <button @click="addClassroom()" class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"> + ADD </button>
+      </div>
       <table class="text-left">
         <tr>
           <th :class="header.custom_css" class="bg-blue-100 p-5 border-b-2 border-t-2 font-bold uppercase" v-for="header in headers" :key="header.index"> {{header.nome}}</th>
@@ -12,7 +15,9 @@
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
-            <a @click="viewClassroom(classroom.id, classroom.name)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-blue-100"> 👁️ VIEW </button></a>
+            <a @click="viewClassroom(classroom.id, classroom.name)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> 👁️ </button></a>
+            <a @click="editClassroom(classroom.id, classroom.name)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
+
           </td>
         </tr>
       </table>
@@ -56,6 +61,20 @@ name: "ClassroomsList",
     viewClassroom(classroomId, classroomName) {
       this.$router.push({
         name: "classrooms_view",
+        params: {
+          id: classroomId,
+          name: classroomName
+        },
+      });
+    },
+    addClassroom() {
+      this.$router.push({
+        name: "classrooms_add"
+      });
+    },
+    editClassroom(classroomId, classroomName) {
+      this.$router.push({
+        name: "classrooms_edit",
         params: {
           id: classroomId,
           name: classroomName

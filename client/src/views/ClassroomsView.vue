@@ -2,9 +2,11 @@
 <div>
   <div class="mx-80 flex flex-col justify-center">
           <router-view></router-view>
-    <a href="/classrooms">indietro</a>
-     <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
-
+    <a href="/classrooms">🔙</a>
+    <div class="flex justify-between items-center">
+       <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
+        <button @click="addStudent()" class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"> + ADD </button>
+    </div>
       <table class="text-left">
         <tr>
           <th :class="header.custom_css" class="bg-blue-100 p-5 border-b-2 border-t-2 font-bold uppercase" v-for="header in headers" :key="header.index"> {{header.nome}}</th>
@@ -15,7 +17,7 @@
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
-            <a @click="viewClassroom(classroom.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-blue-100"> 👁️ VIEW </button></a>
+            <a @click="editStudent(students, student.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
           </td>
         </tr>
       </table>
@@ -61,6 +63,17 @@ export default {
     this.classroomName = this.$route.params.name;
     let response = await axios.get(` http://localhost:8000/api/classrooms/${this.classroomId}`);
     this.students = response.data;
-  }
+  },
+  methods: {
+    editStudent(students, studentId) {
+      this.$router.push({
+        name: "students_add",
+        params: {
+          students:  students,
+          id: studentId,
+        }
+      });
+    }
+  },
 };
 </script>
