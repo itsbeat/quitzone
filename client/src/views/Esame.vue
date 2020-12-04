@@ -12,7 +12,7 @@
                 </div>
             </div>
     <div class="pl-5">
-
+        <!---->
         <div v-if="currentView === 'quiz'">
 
             <div class="flex">
