@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper" id="login" v-on:submit.prevent>
-        <body class="body-bg pd-12 md:pt-10 pb-6 px-2 md:px-0" style="">
+        <body class="body-bg pd-12 md:pt-10 pb-6 px-2 md:px-0">
             <header class="max-b-lg mx-auto text-center">
                 <a href="#">
                     <h1 class="text-4xl font-bold text-black">Login</h1>
@@ -12,7 +12,7 @@
                     <h3 class="font-bold text-2xl mb-3">Benvenuto al login!</h3>
                     <p class="text-gray-400 pt-2 font-medium">Effettua l'accesso.</p>
                     <p class="text-gray-400 font-medium">Oppure
-                        <a href="#" class="text-blue-600 font-medium">Registrati</a>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-700 hover:underline">Registrati</a>
                     </p>
                 </section>
 
@@ -59,10 +59,9 @@
             async login() {
                 try {
                     let response = await this.$api.post('/login', {
-                    email: this.email,
-                    password: this.password,
+                        email: this.email,
+                        password: this.password,
                     });
-                    console.log(response);
                     this.$router.push("/");
                 } catch (error) {
                     this.error = "Email o password errate. Riprova.";
