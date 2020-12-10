@@ -52,6 +52,15 @@ Applicazione realizzata in Laravel e VueJS con database SQL per la gestione, cre
 - Aggiungi file .env dentro alla cartella client con il comando:
     cp .env.example .env
 
+### Check Docker/Compose
+- Controllare la versione del Docker e del Docker Compose
+    Da terminale lanciare il comando: $ docker -v
+                                      Docker version 19.03.13
+    Successivamente per il Compose: $ docker-compose --version
+                                      docker-compose version 1.27.4
+- Digitare comando 
+    ./start-dev.sh per modificare gli host
+
 ### Per scaricare aggiornamenti
 - Digitare comando:
     git pull
