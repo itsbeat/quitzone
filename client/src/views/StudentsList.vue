@@ -30,6 +30,7 @@ name: "StudentsList",
   async mounted() {
     let response = await this.$api.get('users/list');
     this.users = response.data;
+    console.log(this.$router)
   },
   methods: {
     editUser(userId) {

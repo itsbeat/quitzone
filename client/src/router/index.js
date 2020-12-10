@@ -15,12 +15,18 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {
+      avaiableTo: 'any',
+    },
   },
   {
     path: '/students',
     name: 'students',
-    component: Students,    
+    component: Students,
+    meta: {
+      avaiableTo: 'teacher',
+    }, 
     children: [
       {
         path: 'list',
@@ -47,10 +53,16 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      avaiableTo: 'any',
+    },
   },
   {
     path: '*',
-    redirect: 'home'
+    redirect: 'home',
+    meta: {
+      avaiableTo: 'any',
+    },
   },
 ]
 
@@ -58,6 +70,18 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+
+  if(to.matched[0].meta.avaiableTo === 'any'){
+    console.log('ALLOWED!')
+    next();
+  } else {
+    console.log(to.name + ' ==> ACCES DENIED, this page is not public');
+    next({name: 'Home'});
+  }
+  
 })
 
 export default router
