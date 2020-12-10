@@ -52,6 +52,9 @@ Applicazione realizzata in Laravel e VueJS con database SQL per la gestione, cre
 - Aggiungi file .env dentro alla cartella client con il comando:
     cp .env.example .env
 
+### Requisiti per sistema Windows
+- Digitare comando 
+     git config --global core.safecrlf false
 ### Check Docker/Compose
 - Controllare la versione del Docker e del Docker Compose
     Da terminale lanciare il comando: $ docker -v
