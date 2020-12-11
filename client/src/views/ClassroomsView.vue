@@ -2,7 +2,7 @@
 <div>
   <div class="mx-80 flex flex-col justify-center">
           <router-view></router-view>
-    <a href="/classrooms">🔙</a>
+    <a href="/classrooms/view">🔙</a>
     <div class="flex justify-between items-center">
        <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
         <button @click="addStudent()" class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"> + ADD </button>
@@ -25,7 +25,6 @@
 </div>
 </template>
 <script>
-import axios from "axios"
 
 export default {
   name: "ClassroomsView",
@@ -61,16 +60,15 @@ export default {
   async mounted() {
     this.classroomId = this.$route.params.id;
     this.classroomName = this.$route.params.name;
-    let response = await axios.get(` http://localhost:8000/api/classrooms/${this.classroomId}`);
+    let response = await this.$api.get(`/classrooms/${this.classroomId}`);
     this.students = response.data;
   },
   methods: {
-    editStudent(students, studentId) {
+    addStudent() {
       this.$router.push({
         name: "students_add",
         params: {
-          students:  students,
-          id: studentId,
+          id: this.classroomId,
         }
       });
     }

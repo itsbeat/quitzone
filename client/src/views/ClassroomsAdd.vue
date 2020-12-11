@@ -23,7 +23,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
   name: "ClassroomsAdd",
@@ -40,8 +39,8 @@ export default {
       this.success = null;
 
       try {
-        let response = await axios.post(
-          "http://localhost:8000/api/classrooms/add",
+        let response = await this.$api.post(
+          "/classrooms/add",
           {
               "name": this.classroom_name
           }

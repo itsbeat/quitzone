@@ -71,8 +71,8 @@ export default {
       this.success = null;
 
       try {
-        let response = await axios.post(
-          "http://localhost:8000/api/students/add",
+        let response = await this.$api.post(
+          "/students/add",
           this.newStudentTemplate
         );
         console.log(response);

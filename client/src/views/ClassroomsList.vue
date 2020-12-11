@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
 name: "ClassroomsList",
@@ -54,7 +53,7 @@ name: "ClassroomsList",
     };
   },
   async mounted() {
-    let response = await axios.get("http://localhost:8000/api/classrooms");
+    let response = await this.$api.get("/classrooms");
     this.classrooms = response.data;
   },
   methods: {

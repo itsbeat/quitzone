@@ -23,7 +23,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
   name: "ClassroomEdit",
@@ -42,8 +41,8 @@ export default {
     async editClassroom() {
         
         try {
-        let response = await axios.put(
-          "http://localhost:8000/api/classrooms/edit",
+        let response = await this.$api.put(
+          "/classrooms/edit",
             this.classroom
           );
         console.log(response);
