@@ -19,7 +19,7 @@
           <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"> 
-                <table class="min-w-full divide-y divide-gray-200">
+                <v-client-table :columns="columns" :data="data" :option="option" class="min-w-full divide-y divide-gray-200" >
                   <tr>
                     <th scope="col" class="px-3 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Esame</th>
                     <th scope="col" class="px-3 py-2 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">N^ Domande</th>
@@ -30,15 +30,8 @@
                         <!-- <tr v-for="user in users" :key="user.id"> -->
                         <!-- <td>{{ user.name }}</td> -->
                         <!-- <a @click="viewUser(user.id)"> Dettaglio </a> -->
-                        <!-- <a class="cursor-pointer"  @click="editUser(user.id)"> 🖊️ </a> -->
-                  <td> Cyber Security </td>
-                  <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 30 </td>
-                  <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 20 </td>
-                  <td class="px-3 py-2 whitespace-nowrap text-left text-sm font-medium"> 10 </td>
-                  <td class="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900">15/100</a>
-                  </td>      
-                </table>
+                        <!-- <a class="cursor-pointer"  @click="editUser(user.id)"> 🖊️ </a> -->      
+                </v-client-table>
               </div>
             </div>
           </div>
@@ -48,30 +41,48 @@
 </template>
 
 
-<script>
-//import axios from "axios";
+// <script>
+// //import axios from "axios";
 
-export default {
-name: "StudentsDetailsExams",
-  data() {
-    return {
-      users: []
-    };
-  },
-  // async mounted() {
-  //   let response = await axios.get("http://localhost:8000/api/users");
-  //   this.users = response.data;
-  // },
-  //methods: {
-  //   editUser(userId) {
-  //     this.$router.push({
-  //       name: "",
-  //       params: {
-  //         id: userId
-  //       },
-  //     });
-  //   }
-  // }
-  };
-</script>
-<style></style>
+// export default {{
+// name: "StudentsDetailsExams",
+//   data {
+//     columns: [
+//       'Esame',
+//       'N^ Domande',
+//       'Risposte Corrette',
+//       'Risposte Sbagliate',
+//       'Voto Finale',  
+//       ],
+//       data: getData(),
+//     options: {
+//       headings: {
+//         Esame: 'Esame',
+//         ndomande: 'Ndomande',
+//         r.corrette: 'r.corrette',
+//         r.sbagliate: 'r.sbagliate',
+//         voto: 'voto finale'
+//       },
+//       sortable: [
+//         'Esame', 'Ndomande','r.corrette','r.sbagliate','voto finale'
+//         ],
+//     }
+//   }
+// });
+
+// function getData() {
+//   const arr = []
+//   for (i = 0; i < 20; i++) {
+//     arr.push({
+//       'Esame': i,
+//       'nDomande': `sample${i}`,
+//       'r.corrette': `sample${i}@example.com`,
+//       'r.sbagliate': 'Personnel'
+//       'voto finale': 'Personnel'
+//     });
+//   }
+//   return arr;
+// }
+// }
+// </script>
+// <style></style>
