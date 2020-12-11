@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
-import HelloWorld from './HelloWorld.vue';
+import Spinner from './Spinner.vue';
 
-Vue.component("hello-world", HelloWorld);
+Vue.component("spinner", Spinner);
+

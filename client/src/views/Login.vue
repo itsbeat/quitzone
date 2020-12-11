@@ -60,16 +60,18 @@
             </div>
             <div class="flex justify-center pt-5">
               <button
+                :disabled="btnDisabled"
                 @click="login()"
-                class="hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1 mb-1 rounded shadow-lg hover:shadow-xl transition duration-200"
+                class="focus:outline-none text-white font-bold py-2 px-4 mr-1 mb-1 rounded shadow-lg hover:shadow-xl transition duration-200 flex items-center"
                 :class="{
-                   'bg-gray-700 ': isLoading,
-                   'bg-blue-600': !isLoading,
-                }"
+                   'bg-gray-300 cursor-not-allowed': btnDisabled,
+                   'bg-blue-600 hover:bg-blue-700': !btnDisabled,
+                }" 
               >
+              <spinner :size="30" class="mr-2" v-if="isLoading"/>
+
                {{ textButton }}
               </button>
-              {{isLoading}}
             </div>
             <div class="text-center max-w-lg mx-auto pt-10">
               <a
@@ -99,6 +101,7 @@ export default {
   mounted() {},
   methods: {
     async login() {
+      this.error = null;
       this.isLoading = true;
       try {
         await this.$api.post("/login", {
@@ -118,6 +121,12 @@ export default {
   computed: {
     textButton() {
       return this.isLoading ? "Caricamento..." : "Login";
+    },
+    btnDisabled() {
+      return this.isLoading || this.credentialsEmpty;
+    },
+    credentialsEmpty() {
+      return !this.email || !this.password;
     }
   }
 };
