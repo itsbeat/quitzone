@@ -4,24 +4,24 @@
           <h5 class="uppercase pl-5">Esame</h5>
       </div>
 
-      <div class="flex justify-center bg-grey-lighter">
-                <div class="border-2 border-blue-500 text-blue-500 rounded-full text-center px-4 py-2 m-2" v-for="(q, index) in quizList" :class="{
+      <div class="flex justify-center mb-5">
+                <div class="border-2 border-blue-500 bg-gray-200 text-blue-500 rounded-full text-center px-4 py-2 m-2" v-for="(q, index) in quizList" :class="{
                     'active' : index === currentQuizIndex,
                 }" :key="index">
-                        <h1>{{index + 1}}</h1>
+                        <h1>{{index + 1}} </h1>
                 </div>
             </div>
     <div class="pl-5">
-        <!---->
+
         <div v-if="currentView === 'quiz'">
 
-            <div class="flex">
+            <div class="flex justify-center">
                 <div class="border-2 border-grey-200 p-4">
                     <div class="p-1 underline">
                         Domanda: {{currentQuiz.id}}
                     </div>
 
-                    <div class="bg-gray-200 p-4">
+                    <div class="bg-gray-200 p-4 mb-3">
                         {{currentQuiz.quiz}}
                     </div>
                 
@@ -38,8 +38,9 @@
                     <img class="object-contain h-50 w-full" src="http://via.placeholder.com/640x360" alt="">
                 </div>
             </div>
-            <div class="flex justify-center">
+            <div class="flex justify-center mt-5">
                 <button id="back" class="bg-blue-500 text-white m-2 p-2 uppercase" @click="retrocedi()" :disabled = "canGoBack">Indietro</button>
+                <button class="justify-center">{{currentQuiz.id}}/{{quizList.length}}</button>
                 <button id="next" class="bg-blue-500 text-white m-2 p-2 uppercase disabled:bg-black" @click="avanza()">Avanti</button>
                 <button id="next" class="bg-blue-500 text-white m-2 p-2 uppercase" @click="fine()" :disabled = "endButtonLabel" >Fine</button>
             </div>
