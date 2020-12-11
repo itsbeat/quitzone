@@ -61,10 +61,15 @@
             <div class="flex justify-center pt-5">
               <button
                 @click="login()"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1 mb-1 rounded shadow-lg hover:shadow-xl transition duration-200"
+                class="hover:bg-blue-700 text-white font-bold py-2 px-4 mr-1 mb-1 rounded shadow-lg hover:shadow-xl transition duration-200"
+                :class="{
+                   'bg-gray-700 ': isLoading,
+                   'bg-blue-600': !isLoading,
+                }"
               >
-                Login
+               {{ textButton }}
               </button>
+              {{isLoading}}
             </div>
             <div class="text-center max-w-lg mx-auto pt-10">
               <a
@@ -87,12 +92,14 @@ export default {
     return {
       email: null,
       password: null,
-      error: null
+      error: null,
+      isLoading: false,
     };
   },
   mounted() {},
   methods: {
     async login() {
+      this.isLoading = true;
       try {
         await this.$api.post("/login", {
           email: this.email,
@@ -102,11 +109,16 @@ export default {
       } catch (error) {
         this.error = "Email o password errate. Riprova.";
       }
+      this.isLoading = false;
     },
     resetError() {
       this.error = null;
     }
   },
-  computed: {}
+  computed: {
+    textButton() {
+      return this.isLoading ? "Caricamento..." : "Login";
+    }
+  }
 };
 </script>
