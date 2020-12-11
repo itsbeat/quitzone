@@ -1,6 +1,7 @@
 <template>
   <div>
      <router-view></router-view>
+     Ehi, StudentsCreate!
   </div>
 </template>
 

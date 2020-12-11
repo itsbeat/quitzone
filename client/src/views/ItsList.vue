@@ -15,7 +15,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
   name: "ItsList",
@@ -25,7 +24,7 @@ export default {
     };
   },
   async mounted() {
-    let response = await axios.get("http://localhost:8000/api/users");
+    let response = await this.$api.get('/users');
     this.users = response.data;
   },
   methods: {

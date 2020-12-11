@@ -7,6 +7,7 @@ import Students from '../views/Students.vue';
 import StudentsAdd from '../views/StudentsAdd.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
+import Login from '../views/Login.vue';
 
 import Classrooms from '../views/Classrooms.vue';
 import ClassroomsView from '../views/ClassroomsView.vue';
@@ -22,6 +23,11 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login,
   },
   {
     path: '/students',

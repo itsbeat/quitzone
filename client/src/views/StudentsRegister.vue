@@ -33,7 +33,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
   name: "StudentRegister",
@@ -77,10 +76,7 @@ export default {
       this.success = null;
 
       try {
-        let response = await axios.post(
-          "http://localhost:8000/api/users",
-          this.newUserTemplate
-        );
+        let response = await this.$api.post('/users', this.newUserTemplate);
 
         console.log(response);
         this.$router.push({

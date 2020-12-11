@@ -19,7 +19,6 @@
 </template>
 
 <script>
-import axios from "axios";
 
 export default {
 name: "StudentsList",
@@ -29,7 +28,7 @@ name: "StudentsList",
     };
   },
   async mounted() {
-    let response = await axios.get("http://localhost:8000/api/users");
+    let response = await this.$api.get('users/list');
     this.users = response.data;
   },
   methods: {
