@@ -7,6 +7,7 @@ import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
+import Logout from '../views/Logout.vue';
 
 
 Vue.use(VueRouter)
@@ -20,7 +21,11 @@ const routes = [
   {
     path: '/students',
     name: 'students',
-    component: Students,    
+    component: Students,
+    meta: {
+      requiresAuth: true,
+      roles: ['teacher', 'admin', 'superadmin'],
+    },
     children: [
       {
         path: 'list',
@@ -49,6 +54,11 @@ const routes = [
     component: Login,
   },
   {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+  },
+  {
     path: '*',
     redirect: 'home'
   },
@@ -59,5 +69,52 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// Role based auth
+  router.beforeEach((to, from, next) => {
+
+    // Check if there are any meta data inside parent's routes
+    if (to.matched.some(record => record.meta.roles)) {
+
+      console.log('you tried to enter in a role-based route')
+      var user = localStorage.getItem('user');
+
+      if (!user) {
+        router.push('/login')
+        next(false)
+      }
+
+      var roleHolder = null
+
+      // Get the last route role guard
+      for (var i in to.matched) {
+        var path = to.matched[i]
+
+        if (path.meta && path.meta.roles) {
+          roleHolder = path.meta.roles
+        }
+      }
+
+      if (roleHolder != null && user != null) {
+        // TODO: move this where we can access the Vue instance
+        let userRole;
+
+        let userHasRole = roleHolder.indexOf(userRole) != -1
+
+        if (userHasRole) {
+          next()
+        } else {
+          router.push('/login')
+          next(false)
+        }
+      } else {
+      // If no roles are provided, simply let the user in
+        next()
+      }
+    } else {
+      console.log('this is a open route');
+      next()
+    }
+  })
 
 export default router

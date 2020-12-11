@@ -16,7 +16,6 @@ const api = axios.create({
 api.interceptors.response.use(
     response => {
         if (response.status === 200 || response.status === 201) {
-            console.log('Request passed throught interceptor!',response)
             return Promise.resolve(response);
         } else {
             return Promise.reject(response);

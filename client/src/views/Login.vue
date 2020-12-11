@@ -94,10 +94,13 @@ export default {
   methods: {
     async login() {
       try {
-        await this.$api.post("/login", {
+        let response = await this.$api.post("/login", {
           email: this.email,
           password: this.password
         });
+
+        localStorage.setItem('user',JSON.stringify(response.data.logged_in_user));
+
         this.$router.push("/");
       } catch (error) {
         this.error = "Email o password errate. Riprova.";
@@ -105,7 +108,7 @@ export default {
     },
     resetError() {
       this.error = null;
-    }
+    },
   },
   computed: {}
 };
