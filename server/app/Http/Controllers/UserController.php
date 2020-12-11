@@ -29,7 +29,16 @@ class UserController extends Controller
         return $user;
     }
 
+    public function editUser(Request $request, $id) {
+        $userData = json_decode($request->getContent());
+        return $userData;
+    }
+
     public function list() {
         return User::get();
+    }
+
+    public function getUser($id) {
+        return User::find($id);
     }
 }

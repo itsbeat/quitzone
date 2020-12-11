@@ -1,5 +1,6 @@
 <template>
   <div>
+     <router-view></router-view>
     <table>
       <tr>
         <th>Nome</th>
@@ -8,37 +9,38 @@
       <tr v-for="user in users" :key="user.id">
         <td>{{ user.name }}</td>
         <td>
-          <a @click="viewUser(user.id)">Dettaglio</a>
+          <!-- <a @click="viewUser(user.id)"> Dettaglio </a> -->
+          <a class="cursor-pointer"  @click="editUser(user.id)"> 🖊️ </a>
         </td>
       </tr>
     </table>
+
   </div>
 </template>
+
 <script>
 
 export default {
-  name: "ItsList",
+name: "StudentsList",
   data() {
     return {
       users: []
     };
   },
   async mounted() {
-    let response = await this.$api.get('/users');
+    let response = await this.$api.get('users/list');
     this.users = response.data;
   },
   methods: {
-    viewUser(userId) {
+    editUser(userId) {
       this.$router.push({
-        name: "its_view",
+        name: "students_edit",
         params: {
           id: userId
         },
-        query: {
-          cool: "erik"
-        }
       });
     }
   }
 };
 </script>
+<style></style>

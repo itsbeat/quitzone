@@ -33,16 +33,16 @@
   </div>
 </template>
 <script>
-import axios from "axios";
 
 export default {
-  name: "ItsCreate",
+  name: "StudentRegister",
   data() {
     return {
       newUserTemplate: {
         name: null,
         surname: null,
-        email: null
+        email: null,
+        password:null,
       },
       fields: [
         {
@@ -59,6 +59,11 @@ export default {
           label: "Email",
           name: "email",
           type: "email"
+        },
+        {
+          label: "Password",
+          name: "password",
+          type: "password"
         }
       ],
       success: null,
@@ -71,10 +76,7 @@ export default {
       this.success = null;
 
       try {
-        let response = await axios.post(
-          "http://localhost:8000/api/users",
-          this.newUserTemplate
-        );
+        let response = await this.$api.post('/users', this.newUserTemplate);
 
         console.log(response);
         this.$router.push({
