@@ -7,16 +7,7 @@ import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
-
-<<<<<<< HEAD
-import Its from  '../views/Its.vue'
-import ItsView from '../views/ItsView.vue';
-import ItsList from '../views/ItsList.vue';
-import ItsCreate from '../views/ItsCreate.vue';
 import Esame from '../views/Esame.vue';
-
-=======
->>>>>>> master
 
 Vue.use(VueRouter)
 
