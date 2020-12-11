@@ -1,29 +1,30 @@
 <template>
-  <div id="navbar" class="bg-white">
-    <nav class="h-16 text-white bg-teal-600 flex items-center shadow">
-        <div class="flex items-center flex-no-shrink text-white mr-6">
-      <img src="logo_quitzone.png" class="fill-current h-200 w-300 ml-32" width="200" height="320" >
-      
-    
-        </div>
-        <div class="container mx-auto px-52 ml-44">
-            <div class="flex justify-between items-center">
-                <div class="flex">
-                    <a href="#"
-                        @click="gotoSection(route,index)" 
-                        v-for="(route,index) in visibleRoutes"
-                        :key="index" 
-                        class="font-semibold px-1 py-1 mx-3"
-                        :class="{
-                            ' text-blue-dark border-b-2': selectRouteIndex == index,
-                            'text-gray-200': selectRouteIndex != index,
-                        }"
-                    >
-                        {{route.meta.label}}
-                    </a>
-                   
+<div id="navbar" class="bg-white">
+    <nav class="h-16 text-white bg-teal-600 flex items-center shadow flex w-full">
+        <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
+            <div class="flex items-center text-white mr-52">
+                <img src="logo_quitzone.png" class="fill-current absolue" width="400" height="520" >
+            </div>
+            <div  class="flex items-center container mx-auto">
+                <div class="flex justify-between items-center">
+                    <div class="flex">
+                        <a href="#"
+                            @click="gotoSection(route,index)" 
+                            v-for="(route,index) in visibleRoutes"
+                            :key="index" 
+                            class="font-semibold px-1 py-1 mx-3"
+                            :class="{
+                                ' text-blue-dark border-b-2': selectRouteIndex == index,
+                                'text-gray-200': selectRouteIndex != index,
+                            }"
+                        >
+                            {{route.meta.label}}
+                        </a>
+                    </div>
                 </div>
-                <div class="flex">
+            </div>
+            <div class="flex">
+                <div class="lg:flex lg:flex-grow items-center container mx-auto px-32 ml-74">
                     <div class="relative">
                         <button class="rounded-full overflow-hidden border-2 border-teal-500 w-10 h-10 flex justify-center items-center | hover:border-white focus:outline-none focus:border-white"
                                 @click="isOpen2 = true">
@@ -41,6 +42,7 @@
                 </div>
             </div>
         </div>
+
     </nav>
 </div>
 </template>
@@ -67,6 +69,7 @@ export default {
             name: route.name
         });
     },
+    
   },
   computed: {
       visibleRoutes(){

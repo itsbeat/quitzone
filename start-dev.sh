@@ -18,6 +18,9 @@ fi
 #echo "Using env.$ENV..."
 #cp "envs/env.$ENV" .env
 
+echo "Fixing CRLF"
+./fix-crlf-endings.sh
+
 echo "Starting nginx ingress container..."
 docker network create proxy_network 2> /dev/null
 docker-compose -p ingress -f docker-compose.ingress.yml up -d
