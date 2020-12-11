@@ -44,7 +44,10 @@
                 <button id="next" class="bg-blue-500 text-white m-2 p-2 uppercase" @click="fine()" :disabled = "endButtonLabel" >Fine</button>
             </div>
             
-            <pre>{{this.risposte}}</pre>
+            <pre>{{risposte}}
+                canGoNext
+                {{canGoNext}}
+            </pre>
         
         </div>
         <div class="containerNewGame" v-if="currentView === 'result'">
@@ -195,7 +198,7 @@ export default({
             return this.quizList[this.currentQuizIndex];
         },
         canGoNext(){
-            return this.risposte[this.currentQuiz.id];
+            return this.currentQuizIndex < this.quizList.length -1;
         },
         canGoBack(){
             return this.currentQuizIndex === 0;
