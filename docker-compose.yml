@@ -27,6 +27,11 @@ services:
     build:
       context: ./server
       dockerfile: Dockerfile
+    environment:
+      - DB_HOST=db
+      - DB_DATABASE=quitzone
+      - DB_USERNAME=quitzone
+      - DB_PASSWORD=HLdW3KbaWvRCEq8PUz3xku8iraYEVIq6w3wDPJe/ggI=
     volumes:
       - ./server:/var/www
     links:
