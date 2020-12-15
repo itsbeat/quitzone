@@ -2,7 +2,7 @@
 <div>
   <div class="mx-80 flex flex-col justify-center">
           <router-view></router-view>
-    <a href="/classrooms/view">🔙</a>
+    <a href="/classrooms">🔙</a>
     <div class="flex justify-between items-center">
        <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
         <button @click="addStudent()" class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"> + ADD </button>
@@ -17,7 +17,7 @@
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
-            <a @click="editStudent(students, student.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
+            <a @click="editStudent(student.id, student.name, student.surname, student.cf)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
           </td>
         </tr>
       </table>
@@ -69,9 +69,20 @@ export default {
         name: "students_add",
         params: {
           id: this.classroomId,
-        }
+        },
       });
-    }
-  },
-};
+    },
+    editStudent(studentId,studentName,studentSurname,studentCf) {
+      this.$router.push({
+        name: "students_edit",
+        params: {
+          id: studentId,
+          name: studentName,
+          surname: studentSurname,
+          cf: studentCf
+        },
+      });
+    },
+  }
+}
 </script>

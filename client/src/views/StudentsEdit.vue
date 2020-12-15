@@ -1,72 +1,94 @@
 <template>
-    <div>
-        <pre>{{ user }}</pre>
-        <div v-for="field in fields" :key="field.name">
-              <div class="grid grid-cols-3 col-gap-5 mb-4">
-                <label class="font-bold" :for="field.name">{{ field.label }}</label>
-                <input
-                  v-model="editUserTemplate[field.name]"
-                  class="col-span-2 border border-gray-400 rounded p-3"
-                  :id="field.name"
-                  :type="field.type"
-                  :name="field.name"
-                />
-              </div>
-        </div>
-        <div class="flex items-center">
-          <!-- <span class="text-red-700 font-bold" v-if="error">
-            {{ error }}
-          </span>
-          <span class="text-green-700 font-bold" v-if="success">
-            Utente creato con successo
-          </span> -->
-          <button
-            @click="editUser()"
-            class="rounded my-3 ml-auto px-3 p-2 bg-green-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
-            Invia
-          </button>
-        </div>
+    <div class="px-5">
+      <a href="/classrooms">🔙</a>
+      <div class="grid grid-cols-3 col-gap-5 mb-4">
+        <label class="font-bold">Nome</label>
+        <input v-model="student.name" type="text" class="col-span-2 border border-gray-400 rounded p-3"/>
+         <label class="font-bold">Cognome</label>
+        <input v-model="student.surname" type="text" class="col-span-2 border border-gray-400 rounded p-3"/>
+         <label class="font-bold">CF</label>
+        <input v-model="student.cf" type="text" class="col-span-2 border border-gray-400 rounded p-3"/>
+      </div>
+    <div class="flex items-center">
+      <span class="text-red-700 font-bold" v-if="error">
+        {{ error }}
+      </span>
+      <span class="text-green-700 font-bold" v-if="success">
+       Studente modificata con successo
+      </span>
+      <button
+        @click="editStudent()"
+        :disabled="!studentIsValid"
+        class="rounded my-3 ml-auto px-3 p-2 bg-indigo-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+      >
+        Invia
+      </button>
     </div>
+  </div>
 </template>
 <script>
 
 export default {
-  name: "students_edit",
+  name: "studentEdit",
   data() {
     return {
-      userId: null,
-      user: null,
-      editUserTemplate: {
-        name: null,
-        email: null
+      success: null,
+      error: null,
+      student: {
+          id: null,
+          name: null,
+          surname: null,
+          cf: null
       },
-      fields: [
-        {
-          label: "Nome",
-          name: "name",
-          type: "text"
-        },
-        {
-          label: "Email",
-          name: "email",
-          type: "email"
-        }
-      ],
     };
   },
   methods: {
-    async editUser() {
-        let response = await this.$api.put('/users/' + this.userId, this.editUserTemplate);
+      
+    async editStudent() {
+        
+        try {
+        let response = await this.$api.put(
+          "/classrooms/edit",
+            this.classroom
+          );
         console.log(response);
+        this.$router.push({
+          name: "classrooms_list"
+        });
+
+        this.success = true;
+        } catch (e) {
+            console.log(e.response);
+            switch (e.response.status) {
+            case 404:
+                this.error = "Non trovo l'endpoint";
+                break;
+            case 422:
+                this.error = "Errore di validazione";
+                break;
+            case 500:
+                this.error = e.response.data.message;
+                break;
+        }
+        this.error += ", cazzo.";
+      }
     }
   },
   async mounted() {
-    this.userId = this.$route.params.id;
-    let response = await this.$api.get(`/users/${this.userId}`);
-    this.user = response.data; 
-    this.editUserTemplate.name = this.user.name;
-    this.editUserTemplate.email = this.user.email;
+    this.student.id = this.$route.params.id;
+    this.student.name = this.$route.params.name;
+    this.student.surname = this.$route.params.surname;
+    this.student.cf = this.$route.params.cf
+    console.log(this.$route.params)
+  },
+  computed: {
+    studentIsValid() {
+      return (
+        !!this.student.name,
+        !!this.student.surname,
+        !!this.student.cf
+      );
+    }
   }
 };
 </script>

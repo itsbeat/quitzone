@@ -71,6 +71,7 @@ export default {
   async mounted() {
     this.classroom.id = this.$route.params.id;
     this.classroom.name = this.$route.params.name;
+    console.log(this.$route.params)
   },
   computed: {
     classroomIsValid() {
