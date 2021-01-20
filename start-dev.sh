@@ -18,7 +18,7 @@ fi
 #echo "Using env.$ENV..."
 #cp "envs/env.$ENV" .env
 
-echo "Fixing CRLF"
+echo "Fix CRLF Endings for Windows users"
 ./fix-crlf-endings.sh
 
 echo "Starting nginx ingress container..."
