@@ -9,3 +9,24 @@
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      logged: false,
+    };
+  },
+  mounted() {
+
+    
+  },
+  methods: {
+    async userIsLogged() {
+      return await this.$api.get('/me', localStorage.getItem('user'));
+    }
+  },
+  computed: {}
+};
+</script>

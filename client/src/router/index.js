@@ -51,7 +51,7 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
+    component: Login
   },
   {
     path: '/logout',
@@ -70,47 +70,75 @@ const router = new VueRouter({
   routes
 })
 
-// Role based auth
+// Auth based guard
+router.beforeEach((to, from, next) => {
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+
+    // if route requires auth
+    if (localStorage.getItem('user')) {
+      
+      // if user is logged in
+      console.log('auth: OK, vai pure')
+      next()
+
+    } else {
+      // if user is not logged in
+      console.log('auth: NO, rilogga')
+
+      router.push('/login');
+      next(false);
+    }
+  } else {
+    next();
+  }
+});
+
+// Role based guard
   router.beforeEach((to, from, next) => {
 
     // Check if there are any meta data inside parent's routes
     if (to.matched.some(record => record.meta.roles)) {
 
-      console.log('you tried to enter in a role-based route')
+      // console.log('you tried to enter in a role-based route: ',to.fullPath)
       var user = localStorage.getItem('user');
 
+
+      // user check is required in the case requiresAuth is not defined 
       if (!user) {
         router.push('/login')
         next(false)
-      }
-
-      var roleHolder = null
-
-      // Get the last route role guard
-      for (var i in to.matched) {
-        var path = to.matched[i]
-
-        if (path.meta && path.meta.roles) {
-          roleHolder = path.meta.roles
-        }
-      }
-
-      if (roleHolder != null && user != null) {
-        // TODO: move this where we can access the Vue instance
-        let userRole;
-
-        let userHasRole = roleHolder.indexOf(userRole) != -1
-
-        if (userHasRole) {
-          next()
-        } else {
-          router.push('/login')
-          next(false)
-        }
       } else {
-      // If no roles are provided, simply let the user in
-        next()
+        var roleHolder = null
+
+        // Get the last route role guard
+        for (var i in to.matched) {
+          var path = to.matched[i]
+
+          if (path.meta && path.meta.roles) {
+            roleHolder = path.meta.roles
+          }
+        }
+
+        if (roleHolder != null && user != null) {
+
+          let userRole;
+
+          let userHasRole = roleHolder.indexOf(userRole) != -1
+
+          if (userHasRole) {
+            next()
+          } else {
+            router.push('/login')
+            next(false)
+          }
+        } else {
+        // If no roles are provided, simply let the user in
+          next()
+        }
       }
+
+      
     } else {
       console.log('this is a open route');
       next()
