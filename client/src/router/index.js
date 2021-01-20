@@ -16,7 +16,10 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta:{
+      label: "Home",
+    }
   },
   {
     path: '/students',
@@ -25,6 +28,7 @@ const routes = [
     meta: {
       requiresAuth: true,
       roles: ['teacher', 'admin', 'superadmin'],
+      label: "Studenti",
     },
     children: [
       {
@@ -57,6 +61,14 @@ const routes = [
     path: '/logout',
     name: 'Logout',
     component: Logout,
+  },
+  {
+    path: '/esami',
+    name: 'Esami',
+    component: StudentsEdit,
+    meta:{
+      label: "Esami",
+    }
   },
   {
     path: '*',

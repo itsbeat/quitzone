@@ -4,7 +4,7 @@ module.exports = {
     proxy: "http://quitzone.local",
     watchOptions: {
       ignored: ['/app/node_modules'],
-      poll: false
+      poll: true
     },
     disableHostCheck: true
   },
