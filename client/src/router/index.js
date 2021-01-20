@@ -15,12 +15,18 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta:{
+      label: "Home",
+    }
   },
   {
     path: '/students',
     name: 'students',
-    component: Students,    
+    component: Students,
+    meta: {
+      label: "Studenti",
+    },
     children: [
       {
         path: 'list',
@@ -47,6 +53,14 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+  },
+  {
+    path: '/esami',
+    name: 'Esami',
+    component: StudentsEdit,
+    meta:{
+      label: "Esami",
+    }
   },
   {
     path: '*',
