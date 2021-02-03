@@ -103,12 +103,12 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem('user')) {
       
       // if user is logged in
-      console.log('auth: OK, vai pure')
+      // console.log('auth: OK, vai pure')
       next()
 
     } else {
       // if user is not logged in
-      console.log('auth: NO, rilogga')
+      // console.log('auth: NO, rilogga')
 
       router.push('/login');
       next(false);

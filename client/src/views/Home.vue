@@ -1,3 +1,4 @@
+
 <template>
   <div class="home">
     welcome
@@ -5,11 +6,9 @@
 </template>
 
 <script>
-
-
-export default {
-  name: 'Home',
-  components: {
+  export default {
+    name: 'Home',
+    components: {
+    }
   }
-}
 </script>

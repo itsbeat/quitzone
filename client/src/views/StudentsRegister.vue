@@ -32,8 +32,8 @@
     </div>
   </div>
 </template>
-<script>
 
+<script>
 export default {
   name: "StudentRegister",
   data() {
