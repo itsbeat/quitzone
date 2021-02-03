@@ -1,0 +1,11 @@
+Bordo tabella -> C4C4C4
+Colore bottone -> 3C64B1
+Colore scritte viola -> 354596
+Barra percentuale scuro -> 1E4693
+Barra percentuale chiaro -> 3C64B1
+Colore Numeri -> 3C64B1
+Colore Login -> 1E4693
+Colore studente barra -> 252D5E
+			 354596
+			 B9C4FF
+Numero azzurro -> 20C9FF

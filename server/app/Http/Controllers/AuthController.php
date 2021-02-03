@@ -33,6 +33,10 @@ class AuthController extends Controller
 
                 );
         }
+
+        return response()->json([
+            "error" => "invalid-credentials"
+        ], 422);
     }
 
     public function logout (Request $request){ 
@@ -43,6 +47,10 @@ class AuthController extends Controller
                 "message" => "logout_ok"
             ], 200)
             ->withCookie($cookie);
+    }
+
+    public function me (Request $request, $user) {
+        return Auth::user();
     }
         
     

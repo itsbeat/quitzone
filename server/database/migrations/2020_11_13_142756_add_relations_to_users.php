@@ -15,11 +15,11 @@ class AddRelationsToUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->bigInteger("info_id")->nullable();
-            $table->bigInteger("role_id")->unsigned()->nullable();
+            $table->bigInteger("object_id")->unsigned()->nullable();
             $table
-                ->foreign("role_id")
+                ->foreign("object_id")
                 ->references("id")
-                ->on("roles")
+                ->on("objects_info")
                 ->onDelete("cascade");
         });
     }
@@ -32,8 +32,8 @@ class AddRelationsToUsers extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign("role_id");
-            $table->dropColumn("role_id");
+            $table->dropForeign("object_id");
+            $table->dropColumn("object_id");
         });
     }
 }

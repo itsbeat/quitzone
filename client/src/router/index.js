@@ -7,6 +7,7 @@ import StudentsCreate from '../views/StudentsCreate.vue';
 import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
+import Logout from '../views/Logout.vue';
 
 
 Vue.use(VueRouter)
@@ -16,17 +17,19 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    meta: {
-      avaiableTo: 'any',
-    },
+    meta:{
+      label: "Home",
+    }
   },
   {
     path: '/students',
     name: 'students',
     component: Students,
     meta: {
-      avaiableTo: 'teacher',
-    }, 
+      requiresAuth: true,
+      roles: ['teacher', 'admin', 'superadmin'],
+      label: "Studenti",
+    },
     children: [
       {
         path: 'list',
@@ -52,10 +55,20 @@ const routes = [
   {
     path: '/login',
     name: 'Login',
-    component: Login,
-    meta: {
-      avaiableTo: 'any',
-    },
+    component: Login
+  },
+  {
+    path: '/logout',
+    name: 'Logout',
+    component: Logout,
+  },
+  {
+    path: '/esami',
+    name: 'Esami',
+    component: StudentsEdit,
+    meta:{
+      label: "Esami",
+    }
   },
   {
     path: '*',
@@ -72,16 +85,79 @@ const router = new VueRouter({
   routes
 })
 
+// Auth based guard
 router.beforeEach((to, from, next) => {
 
-  if(to.matched[0].meta.avaiableTo === 'any'){
-    console.log('ALLOWED!')
-    next();
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+
+    // if route requires auth
+    if (localStorage.getItem('user')) {
+      
+      // if user is logged in
+      console.log('auth: OK, vai pure')
+      next()
+
+    } else {
+      // if user is not logged in
+      console.log('auth: NO, rilogga')
+
+      router.push('/login');
+      next(false);
+    }
   } else {
-    console.log(to.name + ' ==> ACCES DENIED, this page is not public');
-    next({name: 'Home'});
+    next();
   }
-  
-})
+});
+
+// Role based guard
+router.beforeEach((to, from, next) => {
+
+  // Check if there are any meta data inside parent's routes
+  if (to.matched.some(record => record.meta.roles)) {
+
+    // console.log('you tried to enter in a role-based route: ',to.fullPath)
+    var user = localStorage.getItem('user');
+
+
+    // user check is required in the case requiresAuth is not defined 
+    if (!user) {
+      router.push('/login')
+      next(false)
+    } else {
+      var roleHolder = null
+
+      // Get the last route role guard
+      for (var i in to.matched) {
+        var path = to.matched[i]
+
+        if (path.meta && path.meta.roles) {
+          roleHolder = path.meta.roles
+        }
+      }
+
+      if (roleHolder != null && user != null) {
+
+        let userRole;
+
+        let userHasRole = roleHolder.indexOf(userRole) != -1
+
+        if (userHasRole) {
+          next()
+        } else {
+          router.push('/login')
+          next(false)
+        }
+      } else {
+      // If no roles are provided, simply let the user in
+        next()
+      }
+    }
+
+      
+    } else {
+      console.log('this is a open route');
+      next()
+    }
+  })
 
 export default router

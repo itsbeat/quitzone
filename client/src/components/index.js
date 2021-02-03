@@ -1,5 +1,3 @@
 import Vue from 'vue';
-
-import HelloWorld from './HelloWorld.vue';
-
-Vue.component("hello-world", HelloWorld);
+import NavBar from "./NavBar.vue"
+Vue.component("nav-bar", NavBar);

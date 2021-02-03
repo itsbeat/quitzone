@@ -3,13 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vue-cli-service serve --port 80",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "autoprefixer": "^9.8.6",
     "axios": "^0.21.0",
     "core-js": "^3.6.5",
+    "postcss": "^7.0.35",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.1",
     "vue": "^2.6.11",
     "vue-router": "^3.4.9"
   },
