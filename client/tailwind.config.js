@@ -9,11 +9,14 @@ module.exports = {
         dark: '#3C64B1', 
       },
       gray:{
-        light:"#373f41",
+        light:"#737B7D",
         dark:"#373F41",
       },
       white:{
         normal:"#ffffff",
+      },
+      red: {
+        normal: "#C7342B",
       },
     },
   },
