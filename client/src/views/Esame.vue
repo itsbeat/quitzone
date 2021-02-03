@@ -1,10 +1,10 @@
 <template>
-  <div>
+    <div class="container">
       <div class="flex justify-between items-center py-5">
-          <h5 class="uppercase pl-5">Esame</h5>
+          <h5 class="uppercase pl-5">{{quiztitolo}} {{currentQuiz.divider}} {{currentQuiz.materia}} {{currentQuiz.divider}} {{currentQuiz.docente}}</h5>
           <div class="flex justify-center">
                 <div 
-                    class="border-2 border-blue-500 bg-gray-200 text-blue-500 rounded-full text-center px-4 py-2 m-2" 
+                    class="border-2 border-blue-800 text-blue-800 rounded-full text-center px-4 py-2 m-2" 
                     v-for="(q, index) in quizList"
                     :class="{
                         'active' : index === currentQuizIndex,
@@ -14,10 +14,10 @@
                         <h1>{{index + 1}} </h1>
                 </div>
         </div>
-        <div class="flex items-center justify-center h-24 w-24 border-gray-700 border-4 rounded-full">
+        <div class="flex items-center justify-center m h-24 w-24 border-green-400 border-4 rounded-full">
             <h3>{{countdownFormatted}}</h3>
         </div>
-      </div>
+    </div>
         
       
     <div class="pl-5 mt-2">
@@ -25,7 +25,7 @@
         <div v-if="currentView === 'quiz'">
 
             <div class="flex justify-center">
-                <div class="border-2 border-grey-200 p-4">
+                <div class="flex-1 border-2 border-grey-200 p-4 ">
                     <div class="p-1 underline">
                         Domanda: {{currentQuiz.id}}
                     </div>
@@ -43,15 +43,15 @@
                         </div>
                     </div>
                 </div>
-                <div class="pl-28">
+                <div class="flex-1 pl-5">
                     <img class="object-contain h-50 w-full" src="http://via.placeholder.com/640x360" alt="">
                 </div>
             </div>
-            <div class="flex justify-center mt-5">
-                <button id="back" class="bg-blue-500 text-white m-2 p-2 uppercase" @click="retrocedi()" :disabled = "canGoBack">Indietro</button>
-                <button class="justify-center">{{currentQuiz.id}}/{{quizList.length}}</button>
-                <button id="next" class="bg-blue-500 text-white m-2 p-2 uppercase disabled:bg-black" @click="avanza()">Avanti</button>
-                <button id="next" class="bg-blue-500 text-white m-2 p-2 uppercase" @click="fine()" :disabled = "endButtonLabel" >Fine</button>
+            <div class="flex justify-center items-center mt-8">
+                <button id="back" class="bg-blue-700 text-white focus:outline-none m-2 p-2 uppercase" @click="retrocedi()" :disabled = "canGoBack">Indietro</button>
+                <span class="font-bold mx-8">{{currentQuiz.id}}/{{quizList.length}}</span>
+                <button id="next" class="bg-blue-700 text-white focus:outline-none m-2 p-2 uppercase disabled:bg-black" @click="avanza()">Avanti</button>
+                <button id="next" class="bg-blue-700 text-white focus:outline-none m-2 p-2 uppercase" @click="fine()" :disabled = "endButtonLabel" >Fine</button>
             </div>
             
         
@@ -75,6 +75,9 @@ export default({
             quizList : [
                 {
                     id: 1,
+                    materia: 'Informatica',
+                    docente: 'Alberini',
+                    divider: '>',
                     quiz: 'Di che colore era il cavallo bianco di napoleone?',
                     answers: [],
                     seen: false,
@@ -95,6 +98,9 @@ export default({
                         ],
                 },  {
                     id: 2,
+                    materia: 'Informatica',
+                    docente: 'Rocchetto',
+                    divider: '>',
                     quiz: 'Quante sono le regioni italiane?',
                     answers: [],
                     seen: false,
@@ -115,6 +121,9 @@ export default({
                         ]
                 },  {
                     id: 3,
+                    materia: 'Informatica',
+                    docente: 'Rocchetto',
+                    divider: '>',
                     quiz: 'Chi tra questi comanda in ITS Last?',
                     answers: [],
                     seen: false,
@@ -135,6 +144,35 @@ export default({
                     ],
                 },  {
                     id: 4,
+                    materia: 'Informatica',
+                    docente: 'Rocchetto',
+                    divider: '>',
+                    quiz: 'Quanto fa: 15 + 18?',
+                    answers: [],
+                    seen: false,
+                    correct:[4],
+                    choices: [
+                        
+                            {
+                                id : 1, text: '36'
+                            },
+                            {
+                                id : 2, text: '33'
+                            },
+                            {
+                                id : 3, text: 'un pesce'
+                            },
+                            {
+                                id : 4, text: 'te pituro sul muro'
+
+                            }
+                        ]
+                },
+                {
+                    id: 5,
+                    materia: 'Informatica',
+                    docente: 'Rocchetto',
+                    divider: '>',
                     quiz: 'Quanto fa: 15 + 18?',
                     answers: [],
                     seen: false,
@@ -161,7 +199,8 @@ export default({
             currentView: 'quiz',
             score: 0,
             risposte: {},
-            countdown: 3600000
+            countdown: 3600000,
+            quiztitolo: 'Esame',
         }
     },
     beforeMount() {
@@ -198,11 +237,11 @@ export default({
         checkAnswerByIndex(index) {
             let quizElement = this.quizList[index]
             if (!this.risposte[quizElement.id] && quizElement.seen) {
-                return 'bg-red-200';
+                return 'bg-indigo-200';
             } else if (!this.risposte[quizElement.id]) {
-                return 'bg-gray-200';
+                return 'bg-white';
             } else {
-                return 'bg-green-200';
+                return 'bg-blue-800 font-color-white';
             }
         },
         setCountdown() {
@@ -232,3 +271,9 @@ export default({
     }
 })
 </script>
+
+<style>
+.font-color-white{
+    color: white !important;
+}
+</style>
