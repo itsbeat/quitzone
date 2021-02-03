@@ -17,7 +17,8 @@
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
-            <a @click="editStudent(student.id, student.name, student.surname, student.cf)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
+            <a @click="editStudent(student.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
+            <a @click="deleteStudent(student.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> 🗑️ </button></a>
           </td>
         </tr>
       </table>
@@ -59,9 +60,12 @@ export default {
   },
   async mounted() {
     this.classroomId = this.$route.params.id;
-    this.classroomName = this.$route.params.name;
     let response = await this.$api.get(`/classrooms/${this.classroomId}`);
-    this.students = response.data;
+    console.log(response.data);
+    this.students = response.data.students;
+    console.log(this.students);
+    this.classroomName = response.data.name;
+
   },
   methods: {
     addStudent() {
@@ -72,7 +76,7 @@ export default {
         },
       });
     },
-    editStudent(studentId,studentName,studentSurname,studentCf) {
+    editStudent(studentId) {
       this.$router.push({
         name: "students_edit",
         params: {
@@ -83,6 +87,11 @@ export default {
         },
       });
     },
+    async deleteStudent(studentId) {
+      await this.$api.delete(`/students/delete/${studentId}`);
+      let response = await this.$api.get(`/classrooms/${this.classroomId}`);
+      this.students = response.data.students;
+      }
   }
 }
 </script>

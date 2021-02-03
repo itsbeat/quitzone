@@ -5,7 +5,6 @@ import Home from '../views/Home.vue'
 
 import Students from '../views/Students.vue';
 import StudentsAdd from '../views/StudentsAdd.vue';
-import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
 
@@ -34,11 +33,6 @@ const routes = [
     name: 'students',
     component: Students,    
     children: [
-      {
-        path: 'list',
-        name: "students_list",
-        component: StudentsList,
-      },
       {
         path: 'add/:id',
         name: 'students_add',

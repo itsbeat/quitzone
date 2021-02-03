@@ -48,12 +48,12 @@ export default {
         
         try {
         let response = await this.$api.put(
-          "/classrooms/edit",
-            this.classroom
+          "/students/edit",
+            this.student
           );
         console.log(response);
         this.$router.push({
-          name: "classrooms_list"
+          name: "classrooms_view"
         });
 
         this.success = true;
@@ -76,9 +76,8 @@ export default {
   },
   async mounted() {
     this.student.id = this.$route.params.id;
-    this.student.name = this.$route.params.name;
-    this.student.surname = this.$route.params.surname;
-    this.student.cf = this.$route.params.cf
+    let response = await this.$api.get(`/students/change/${this.student.id}`);
+    this.student = response.data;
     console.log(this.$route.params)
   },
   computed: {

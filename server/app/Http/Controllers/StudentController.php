@@ -28,4 +28,31 @@ class StudentController extends Controller
         
         return $student;
     }
+
+    public function edit($id){
+        return StudentInfo::find($id);
+    }
+    public function editStudent(Request $request) {
+        $StudentData = json_decode($request->getContent());
+
+        $request->validate([
+            "name" => "required",
+            "surname" => "required",
+            "cf" => "required",
+        ]);
+
+        $student = StudentInfo::find($StudentData->id);
+
+        $student->name = $StudentData->name;
+        $student->surname = $StudentData->surname;
+        $student->cf = $StudentData->cf;
+
+        $student->save();
+
+        return $student;
+    }
+    public function deleteStudent($id){
+        StudentInfo::destroy($id);
+
+    }
 }

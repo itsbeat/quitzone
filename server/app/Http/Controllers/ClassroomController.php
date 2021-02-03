@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classroom;
-use App\Models\StudentInfo;
 use Illuminate\Http\Request;
 
 class ClassroomController extends Controller
@@ -12,15 +11,15 @@ class ClassroomController extends Controller
         return Classroom::get();
     }
 
-    public function getStudents($id) {
-        return StudentInfo::where("classroom_id", $id)->get();
+    public function show($id) {
+        return Classroom::with(["students"])->find($id);
     }
 
     public function createClassroom(Request $request) {
         $classroomData = json_decode($request->getContent());
 
         $request->validate([
-            "name" => "required|unique:classrooms",
+            "name" => "required",
         ]);
 
         $classroom = new Classroom();
@@ -30,6 +29,10 @@ class ClassroomController extends Controller
         $classroom->save();
 
         return $classroom;
+    }
+
+    public function edit($id){
+        return Classroom::find($id);
     }
 
     public function editClassroom(Request $request) {
@@ -46,5 +49,10 @@ class ClassroomController extends Controller
         $classroom->save();
 
         return $classroom;
+    }
+
+    public function deleteClassroom($id){
+        Classroom::destroy($id);
+
     }
 }

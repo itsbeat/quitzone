@@ -70,7 +70,9 @@ export default {
   },
   async mounted() {
     this.classroom.id = this.$route.params.id;
-    this.classroom.name = this.$route.params.name;
+    let response = await this.$api.get(`/classrooms/change/${this.classroom.id}`);
+    console.log(response.data);
+    this.classroom.name = response.data.name;
     console.log(this.$route.params)
   },
   computed: {

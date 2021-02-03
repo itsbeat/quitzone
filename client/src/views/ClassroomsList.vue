@@ -15,9 +15,9 @@
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
-            <a @click="viewClassroom(classroom.id, classroom.name)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> 👁️ </button></a>
-            <a @click="editClassroom(classroom.id, classroom.name)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
-
+            <a @click="viewClassroom(classroom.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> 👁️ </button></a>
+            <a @click="editClassroom(classroom.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> ✏️ </button></a>
+            <a @click="deleteClassroom(classroom.id)"><button class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"> 🗑️ </button></a>
           </td>
         </tr>
       </table>
@@ -57,12 +57,11 @@ name: "ClassroomsList",
     this.classrooms = response.data;
   },
   methods: {
-    viewClassroom(classroomId, classroomName) {
+    viewClassroom(classroomId) {
       this.$router.push({
         name: "classrooms_view",
         params: {
           id: classroomId,
-          name: classroomName
         },
       });
     },
@@ -71,15 +70,19 @@ name: "ClassroomsList",
         name: "classrooms_add"
       });
     },
-    editClassroom(classroomId, classroomName) {
+    editClassroom(classroomId) {
       this.$router.push({
         name: "classrooms_edit",
         params: {
           id: classroomId,
-          name: classroomName
         },
       });
-    }
+    },
+    async deleteClassroom(classroomId) {
+      await this.$api.delete(`/classrooms/delete/${classroomId}`);
+      let response = await this.$api.get("/classrooms");
+      this.classrooms = response.data;
+      }
   }
 };
 </script>
