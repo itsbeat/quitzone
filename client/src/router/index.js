@@ -107,48 +107,48 @@ router.beforeEach((to, from, next) => {
 });
 
 // Role based guard
-  router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
 
-    // Check if there are any meta data inside parent's routes
-    if (to.matched.some(record => record.meta.roles)) {
+  // Check if there are any meta data inside parent's routes
+  if (to.matched.some(record => record.meta.roles)) {
 
-      // console.log('you tried to enter in a role-based route: ',to.fullPath)
-      var user = localStorage.getItem('user');
+    // console.log('you tried to enter in a role-based route: ',to.fullPath)
+    var user = localStorage.getItem('user');
 
 
-      // user check is required in the case requiresAuth is not defined 
-      if (!user) {
-        router.push('/login')
-        next(false)
-      } else {
-        var roleHolder = null
+    // user check is required in the case requiresAuth is not defined 
+    if (!user) {
+      router.push('/login')
+      next(false)
+    } else {
+      var roleHolder = null
 
-        // Get the last route role guard
-        for (var i in to.matched) {
-          var path = to.matched[i]
+      // Get the last route role guard
+      for (var i in to.matched) {
+        var path = to.matched[i]
 
-          if (path.meta && path.meta.roles) {
-            roleHolder = path.meta.roles
-          }
-        }
-
-        if (roleHolder != null && user != null) {
-
-          let userRole;
-
-          let userHasRole = roleHolder.indexOf(userRole) != -1
-
-          if (userHasRole) {
-            next()
-          } else {
-            router.push('/login')
-            next(false)
-          }
-        } else {
-        // If no roles are provided, simply let the user in
-          next()
+        if (path.meta && path.meta.roles) {
+          roleHolder = path.meta.roles
         }
       }
+
+      if (roleHolder != null && user != null) {
+
+        let userRole;
+
+        let userHasRole = roleHolder.indexOf(userRole) != -1
+
+        if (userHasRole) {
+          next()
+        } else {
+          router.push('/login')
+          next(false)
+        }
+      } else {
+      // If no roles are provided, simply let the user in
+        next()
+      }
+    }
 
       
     } else {

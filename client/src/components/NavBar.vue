@@ -35,7 +35,7 @@
                             <div class="bg-white rounded-lg shadow-lg py-2 w-48">
                                 <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Profilo</a>
                                 <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Impostazioni</a>
-                                <a href="#" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Log out</a>
+                                <a href="/logout" class="block text-grey-dark font-semibold px-4 py-2 | hover:text-blue-dark">Log out</a>
                             </div>
                         </div>
                     </div>
