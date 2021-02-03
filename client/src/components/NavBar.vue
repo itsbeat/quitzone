@@ -1,7 +1,7 @@
 <template>
   <div id="navbar" class="bg-white">
     <nav
-      class="h-16 text-white bg-teal-600 flex items-center shadow flex w-full"
+      class="h-16 text-white bg-teal-600 flex items-center shadow w-full"
     >
       <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
         <div class="flex items-center text-white mr-52">
