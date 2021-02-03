@@ -1,6 +1,6 @@
 import Vue from 'vue';
-
-import HelloWorld from './HelloWorld.vue';
 import NavBar from "./NavBar.vue"
-Vue.component("hello-world", HelloWorld);
+import Spinner from './Spinner.vue';
+
 Vue.component("nav-bar", NavBar);
+Vue.component("spinner", Spinner);
