@@ -1,18 +1,26 @@
 module.exports = {
   theme: {
     colors: {
+      black: {
+        dark: '#373F41',
+      },
       blue: {
+        light: '#e8ecf5',
         dark: '#3C64B1', 
       },
-      grey:{
-        light:"#9c9c9c",
+      gray:{
+        light:"#737B7D",
         dark:"#373F41",
       },
       white:{
-        normal:"#fff",
+        normal:"#ffffff",
+      },
+      red: {
+        normal: "#C7342B",
       },
     },
   },
+  
   purge: [],
   darkMode: false, // or 'media' or 'class'
   variants: {
