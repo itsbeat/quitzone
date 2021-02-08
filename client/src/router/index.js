@@ -9,8 +9,6 @@ import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
 import Main from '../views/Main.vue';
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,55 +22,55 @@ const routes = [
     path: "/",
     component: Main,
     children: [
-    {
-      path: 'home',
-      name: 'Home',
-      component: Home,
-      meta:{
-        label: "Home",
-      }
-    },
-    {
-      path: 'students',
-      name: 'students',
-      component: Students,
-      meta: {
-        label: "Studenti",
-      },
-      children: [
-        {
-          path: 'list',
-          name: "students_list",
-          component: StudentsList,
-        },
-        {
-          path: 'create',
-          name: 'students_create',
-          component: StudentsCreate,
-        },
-        {
-          path: 'edit/:id',
-          name: 'students_edit',
-          component: StudentsEdit,
-        },
-        {
-          path: '',
-          redirect: 'list'
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home,
+        meta:{
+          label: "Home",
         }
-      ] 
-    },
-    {
-      path: 'esami',
-      name: 'Esami',
-      component: StudentsEdit,
-      meta:{
-        label: "Esami",
-      }
-    },
-    {
-      path: '',
-      redirect: 'home'
-    },
+      },
+      {
+        path: 'students',
+        name: 'students',
+        component: Students,
+        meta: {
+          label: "Studenti",
+        },
+        children: [
+          {
+            path: 'list',
+            name: "students_list",
+            component: StudentsList,
+          },
+          {
+            path: 'create',
+            name: 'students_create',
+            component: StudentsCreate,
+          },
+          {
+            path: 'edit/:id',
+            name: 'students_edit',
+            component: StudentsEdit,
+          },
+          {
+            path: '',
+            redirect: 'list'
+          }
+        ]
+      },
+      {
+        path: 'esami',
+        name: 'Esami',
+        component: StudentsEdit,
+        meta:{
+          label: "Esami",
+        }
+      },
+      {
+        path: '',
+        redirect: 'home'
+      },
     ]
   },
   {
