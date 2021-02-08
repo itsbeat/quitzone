@@ -57,6 +57,18 @@ services:
       - MYSQL_PASSWORD=HLdW3KbaWvRCEq8PUz3xku8iraYEVIq6w3wDPJe/ggI=
     networks:
       - default
+  pma:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - 9001:80
+    environment:
+      PMA_HOST: db
+      PMA_USER: quitzone
+      PMA_PASSWORD: HLdW3KbaWvRCEq8PUz3xku8iraYEVIq6w3wDPJe/ggI=
+
 volumes:
   database:
     driver: local
