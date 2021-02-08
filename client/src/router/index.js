@@ -11,8 +11,6 @@ import Main from '../views/Main.vue';
 import Profile from '../views/Profile.vue';
 import ProfileEdit from '../views/ProfileEdit.vue';
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -56,40 +54,47 @@ const routes = [
       meta: {
         label: "Studenti",
       },
-      children: [
-        {
-          path: 'list',
-          name: "students_list",
-          component: StudentsList,
+      {
+        path: 'students',
+        name: 'students',
+        component: Students,
+        meta: {
+          label: "Studenti",
         },
-        {
-          path: 'create',
-          name: 'students_create',
-          component: StudentsCreate,
-        },
-        {
-          path: 'edit/:id',
-          name: 'students_edit',
-          component: StudentsEdit,
-        },
-        {
-          path: '',
-          redirect: 'list'
+        children: [
+          {
+            path: 'list',
+            name: "students_list",
+            component: StudentsList,
+          },
+          {
+            path: 'create',
+            name: 'students_create',
+            component: StudentsCreate,
+          },
+          {
+            path: 'edit/:id',
+            name: 'students_edit',
+            component: StudentsEdit,
+          },
+          {
+            path: '',
+            redirect: 'list'
+          }
+        ]
+      },
+      {
+        path: 'esami',
+        name: 'Esami',
+        component: StudentsEdit,
+        meta:{
+          label: "Esami",
         }
-      ] 
-    },
-    {
-      path: 'esami',
-      name: 'Esami',
-      component: StudentsEdit,
-      meta:{
-        label: "Esami",
-      }
-    },
-    {
-      path: '',
-      redirect: 'home'
-    },
+      },
+      {
+        path: '',
+        redirect: 'home'
+      },
     ]
   },
   {
