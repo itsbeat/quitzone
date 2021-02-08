@@ -90,10 +90,6 @@ const routes = [
         ]
       },
       {
-        path: '*',
-        redirect: 'home'
-      },
-      {
         path: '',
         redirect: 'home'
       },
