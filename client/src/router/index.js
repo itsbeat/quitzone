@@ -8,6 +8,8 @@ import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
 import Main from '../views/Main.vue';
+import Profile from '../views/Profile.vue';
+import ProfileEdit from '../views/ProfileEdit.vue';
 
 
 
@@ -31,6 +33,21 @@ const routes = [
       meta:{
         label: "Home",
       }
+    },
+    {
+      path: 'profile',
+      name: 'Profile',
+      component: Profile,
+      meta:{
+        label: "Profile",
+      },
+      children: [
+        {
+          path: 'edit',
+          name: "profile_edit",
+          component: ProfileEdit,
+        },
+      ]
     },
     {
       path: 'students',
