@@ -3,12 +3,12 @@
     <router-view></router-view>
     <div class="mx-80 flex flex-col justify-center">
       <div class="flex justify-between items-center">
-        <h1 class="py-20 uppercase font-bold">Le mie classi</h1>
+        <h1 class="py-20 uppercase font-bold ">LE MIE CLASSI</h1>
         <button
           @click="addClassroom()"
-          class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"
+          class="flex items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-2 md:text-lg md:px-4"
         >
-          + ADD
+          ADD
         </button>
       </div>
       <table class="text-left">
@@ -29,21 +29,21 @@
           <td class="p-5 border-r-2 border-b-2 text-center">
             <a @click="viewClassroom(classroom.id)"
               ><button
-                class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
+                class="inline-flex items-center justify-center px-5 py-3 mx-2 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
               >
                 👁️
               </button></a
             >
             <a @click="editClassroom(classroom.id)"
               ><button
-                class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
+                class="inline-flex items-center justify-center px-5 py-3 mx-2 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
               >
                 ✏️
               </button></a
             >
             <a @click="deleteClassroom(classroom.id)"
               ><button
-                class="inline-flex items-center justify-center px-5 py-3 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
+                class="inline-flex items-center justify-center px-5 py-3 mx-2 border-2 text-base font-medium rounded-md text-black bg-white hover:bg-indigo-100"
               >
                 🗑️
               </button></a
@@ -64,19 +64,19 @@ export default {
       headers: [
         {
           nome: "classe",
-          custom_css: "w-1/4 border-l-2",
+          custom_css: "w-1/4 border-l-2 underline",
         },
         {
           nome: "partecipanti",
-          custom_css: "w-1/4",
+          custom_css: "w-1/5 underline",
         },
         {
           nome: "media",
-          custom_css: "w-1/4",
+          custom_css: "w-1/5 underline",
         },
         {
           nome: "",
-          custom_css: "w-1/3 border-r-2",
+          custom_css: "w-2/3 border-r-2",
         },
       ],
     };

@@ -1,6 +1,13 @@
 <template>
   <div class="px-5">
-    <button @click="back()">Indietro</button>
+    <div class="flex justify-start">
+      <button 
+        @click="back()"
+        class="flex items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-2 md:text-lg md:px-4 mt-5"
+      >
+        Indietro
+      </button>
+    </div>
     <div class="grid grid-cols-3 col-gap-5 mb-4">
       <label class="font-bold">Nome classe</label>
       <input

@@ -1,14 +1,21 @@
 <template>
   <div>
     <div class="mx-80 flex flex-col justify-center">
-      <button @click="back()">Indietro</button>
+    <div class="flex justify-start">
+      <button 
+        @click="back()"
+        class="flex items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-2 md:text-lg md:px-4 mt-5"
+      >
+        Indietro
+      </button>
+    </div>
       <div class="flex justify-between items-center">
-        <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
+        <h1 class="py-20 uppercase font-bold">LE MIE CLASSI > {{ classroomName }}</h1>
         <button
           @click="addStudent()"
-          class="flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-4 md:text-lg md:px-10"
+          class="flex items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-2 md:text-lg md:px-4"
         >
-          + ADD
+          ADD
         </button>
       </div>
       <table class="text-left">
@@ -26,7 +33,6 @@
           <td class="p-5 border-l-2 border-b-2">
             {{ student.name + " " + student.surname }}
           </td>
-          <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-b-2">...</td>
           <td class="p-5 border-r-2 border-b-2 text-center">
@@ -62,23 +68,19 @@ export default {
       headers: [
         {
           nome: "studente",
-          custom_css: "w-1/6 w-1/4 border-l-2",
-        },
-        {
-          nome: "esami svolti",
-          custom_css: "w-1/6",
+          custom_css: "w-1/6 w-1/4 border-l-2 underline",
         },
         {
           nome: "quiz svolti",
-          custom_css: "w-1/6",
+          custom_css: "w-1/6 underline",
         },
         {
-          nome: "quiz azioni",
-          custom_css: "w-1/6",
+          nome: "media",
+          custom_css: "w-1/6 underline",
         },
         {
           nome: "",
-          custom_css: "w-1/3 w-1/4 border-r-2",
+          custom_css: "w-2/3 w-1/4 border-r-2",
         },
       ],
     };
