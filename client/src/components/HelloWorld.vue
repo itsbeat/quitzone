@@ -127,7 +127,7 @@ export default {
 }
  .base-timer__path-elapsed {
 	 stroke-width: 7px;
-	 stroke: grey;
+	 stroke: #fff;
 }
  .base-timer__path-remaining {
 	 stroke-width: 7px;
