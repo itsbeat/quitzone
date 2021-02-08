@@ -10,8 +10,6 @@ import Login from '../views/Login.vue';
 import Logout from '../views/Logout.vue';
 import Main from '../views/Main.vue';
 
-
-
 Vue.use(VueRouter)
 
 const routes = [
@@ -77,6 +75,16 @@ const routes = [
       {
         path: '',
         redirect: 'home'
+      },
+      {
+        path: 'esami',
+        name: 'Esami',
+        component: StudentsEdit,
+        meta:{
+          label: "Esami",
+          requiresAuth: true,
+          roles: ['admin', 'teacher', 'student']
+        }
       },
     ]
   },
