@@ -48,6 +48,10 @@ class AuthController extends Controller
             ], 200)
             ->withCookie($cookie);
     }
+
+    public function me (Request $request, $user) {
+        return Auth::user();
+    }
         
     
 }

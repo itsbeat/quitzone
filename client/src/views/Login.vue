@@ -104,11 +104,14 @@ export default {
       this.error = null;
       this.isLoading = true;
       try {
-        await this.$api.post("/login", {
+        let response = await this.$api.post("/login", {
           email: this.email,
           password: this.password
         });
-        this.$router.push("/");
+
+        localStorage.setItem('user',JSON.stringify(response.data.logged_in_user));
+
+        this.$router.push(this.$route.query.redirect ? this.$route.query.redirect : 'home');
       } catch (error) {
         this.error = "Email o password errate. Riprova.";
       }
@@ -116,7 +119,7 @@ export default {
     },
     resetError() {
       this.error = null;
-    }
+    },
   },
   computed: {
     textButton() {

@@ -1,9 +1,13 @@
 <template>
   <div id="navbar" class="bg-white">
     <nav
-      class="h-16 text-white bg-teal-600 flex items-center shadow flex w-full"
+      class="h-16 text-white bg-teal-600 flex items-center shadow w-full"
     >
       <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
+
+      <!--
+        LOGO SECTION
+      -->
         <div class="flex items-center text-white mr-52">
           <img
             src="logo_quitzone.png"
@@ -12,9 +16,12 @@
             height="520"
           />
         </div>
+        <!--
+          NAV BUTTONS
+        -->
         <div class="flex items-center container mx-auto">
           <div class="flex justify-between items-center">
-            <div class="flex">
+             <div class="flex">
               <a
                 href="#"
                 @click="gotoSection(route, index)"
@@ -31,6 +38,10 @@
             </div>
           </div>
         </div>
+
+        <!--
+          USER SECTION
+        -->
         <div class="flex">
           <div
             class="lg:flex lg:flex-grow items-center container mx-auto px-32 ml-74"
@@ -49,7 +60,7 @@
               ></div>
               <div
                 class="absolute z-30 right-0 mt-2"
-                :class="{ hidden: !isOpen2 }"
+                :class="{ 'hidden': !isOpen2 }"
               >
                 <div class="bg-white rounded-lg shadow-lg py-2 w-48">
                   <a
@@ -88,7 +99,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.$router.options.routes);
     this.selectRouteIndex = 0;
   },
   methods: {
@@ -102,9 +112,8 @@ export default {
   computed: {
     visibleRoutes() {
       let mainRoutes = this.$router.options.routes.find(
-        route => route.name == "main"
+        route => route.name == "Main"
       );
-
       return mainRoutes.children.filter(route => {
         //funzione per filtrare ogni elemento dell'array
         if (route.meta && route.meta.label) {
@@ -116,4 +125,4 @@ export default {
   }
 };
 </script>
-<style></style>
+
