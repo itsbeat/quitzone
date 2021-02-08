@@ -1,58 +1,161 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-    </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul>
+  <div class="base-timer">
+    <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g class="base-timer__circle">
+        <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+        <path
+          :stroke-dasharray="circleDasharray"
+          class="base-timer__path-remaining"
+          :class="remainingPathColor"
+          d="
+            M 50, 50
+            m -45, 0
+            a 45,45 0 1,0 90,0
+            a 45,45 0 1,0 -90,0
+          "
+        ></path>
+      </g>
+    </svg>
+    <span class="base-timer__label">{{ formattedTimeLeft }}</span>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 10;
+const ALERT_THRESHOLD = 5;
+
+const COLOR_CODES = {
+  info: {
+    color: "green"
+  },
+  warning: {
+    color: "orange",
+    threshold: WARNING_THRESHOLD
+  },
+  alert: {
+    color: "red",
+    threshold: ALERT_THRESHOLD
   }
-}
+};
+
+const TIME_LIMIT = 3600;
+
+export default {
+  data() {
+    return {
+      timePassed: 0,
+      timerInterval: null
+    };
+  },
+
+  computed: {
+    circleDasharray() {
+      return `${(this.timeFraction * FULL_DASH_ARRAY).toFixed(0)} 283`;
+    },
+
+    formattedTimeLeft() {
+      const timeLeft = this.timeLeft;
+      const minutes = Math.floor(timeLeft / 60);
+      let seconds = timeLeft % 60;
+
+      if (seconds < 10) {
+        seconds = `0${seconds}`;
+      }
+
+      return `${minutes}:${seconds}`;
+    },
+
+    timeLeft() {
+      return TIME_LIMIT - this.timePassed;
+    },
+
+    timeFraction() {
+      const rawTimeFraction = this.timeLeft / TIME_LIMIT;
+      return rawTimeFraction - (1 / TIME_LIMIT) * (1 - rawTimeFraction);
+    },
+
+    remainingPathColor() {
+      const { alert, warning, info } = COLOR_CODES;
+
+      if (this.timeLeft <= alert.threshold) {
+        return alert.color;
+      } else if (this.timeLeft <= warning.threshold) {
+        return warning.color;
+      } else {
+        return info.color;
+      }
+    }
+  },
+
+  watch: {
+    timeLeft(newValue) {
+      if (newValue === 0) {
+        this.onTimesUp();
+      }
+    }
+  },
+
+  mounted() {
+    this.startTimer();
+  },
+
+  methods: {
+    onTimesUp() {
+      clearInterval(this.timerInterval);
+    },
+
+    startTimer() {
+      this.timerInterval = setInterval(() => (this.timePassed += 1), 1000);
+    }
+  }
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
+<style>
+.base-timer {
+	 position: relative;
+	 width: 100px;
+	 height: 100px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+ .base-timer__svg {
+	 transform: scaleX(-1);
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+ .base-timer__circle {
+	 fill: none;
+	 stroke: none;
 }
-a {
-  color: #42b983;
+ .base-timer__path-elapsed {
+	 stroke-width: 7px;
+	 stroke: grey;
 }
+ .base-timer__path-remaining {
+	 stroke-width: 7px;
+	 stroke-linecap: round;
+	 transform: rotate(90deg);
+	 transform-origin: center;
+	 transition: 1s linear all;
+	 fill-rule: nonzero;
+	 stroke: currentColor;
+}
+ .base-timer__path-remaining.green {
+	 color: #41b883;
+}
+ .base-timer__path-remaining.orange {
+	 color: orange;
+}
+ .base-timer__path-remaining.red {
+	 color: red;
+}
+ .base-timer__label {
+	 position: absolute;
+	 width: 100px;
+	 height: 100px;
+	 top: 0;
+	 display: flex;
+	 align-items: center;
+	 justify-content: center;
+	 font-size: 25px;
+}
+ 
 </style>

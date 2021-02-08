@@ -1,7 +1,7 @@
 <template>
-    <div class="container">
+    <div class="container mx-auto">
       <div class="flex justify-between items-center py-5">
-          <h5 class="uppercase pl-5">{{quiztitolo}} {{currentQuiz.divider}} {{currentQuiz.materia}} {{currentQuiz.divider}} {{currentQuiz.docente}}</h5>
+          <h5 class="uppercase">{{quiztitolo}} {{currentQuiz.divider}} {{currentQuiz.materia}} {{currentQuiz.divider}} {{currentQuiz.docente}}</h5>
           <div class="flex justify-center">
                 <div 
                     class="border-2 border-blue-800 text-blue-800 rounded-full text-center px-4 py-2 m-2" 
@@ -14,13 +14,14 @@
                         <h1>{{index + 1}} </h1>
                 </div>
         </div>
-        <div class="flex items-center justify-center m h-24 w-24 border-green-400 border-4 rounded-full">
-            <h3>{{countdownFormatted}}</h3>
+        <div class="flex items-center rounded-full">
+            <hello-world></hello-world>
         </div>
     </div>
         
+        
       
-    <div class="pl-5 mt-2">
+    <div>
 
         <div v-if="currentView === 'quiz'">
 
@@ -203,9 +204,6 @@ export default({
             quiztitolo: 'Esame',
         }
     },
-    beforeMount() {
-        this.setCountdown();
-    },
     methods: {
         avanza(){
             console.log(this.currentQuizIndex)
@@ -243,15 +241,6 @@ export default({
             } else {
                 return 'bg-blue-800 font-color-white';
             }
-        },
-        setCountdown() {
-            let data = this;
-            var x = setInterval(function() {
-                if (data.countdown == 0) {
-                    clearInterval(x);
-                }   
-                data.countdown -= 1000
-            }, 1000);
         }
     },
     computed: {
@@ -263,9 +252,6 @@ export default({
         },
         endButtonLabel(){
             return this.currentQuizIndex != this.quizList.length -1;
-        },
-        countdownFormatted() {
-            return Math.floor(this.countdown / 60000) + ':' + ((this.countdown % 60000) / 1000).toFixed(0);
         }
 
     }
