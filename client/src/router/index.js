@@ -26,23 +26,6 @@ const routes = [
     component: Login,
   },
   {
-    path: '/classroom/view/:id/students',
-    name: 'students',
-    component: Students,
-    children: [
-      {
-        path: 'add/:id',
-        name: 'students_add',
-        component: StudentsAdd,
-      },
-      {
-        path: 'edit/:id',
-        name: 'students_edit',
-        component: StudentsEdit,
-      },
-    ],
-  },
-  {
     name: "main",
     path: "/",
     component: Main,
@@ -88,6 +71,23 @@ const routes = [
             redirect: 'list'
           }
         ]
+      },
+      {
+        path: '/students',
+        name: 'students',
+        component: Students,
+        children: [
+          {
+            path: 'add/:id',
+            name: 'students_add',
+            component: StudentsAdd,
+          },
+          {
+            path: 'edit/:id',
+            name: 'students_edit',
+            component: StudentsEdit,
+          },
+        ],
       },
       {
         path: '',

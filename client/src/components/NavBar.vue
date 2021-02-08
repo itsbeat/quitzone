@@ -6,7 +6,7 @@
       <div class="max-w-screen-2xl mx-auto flex items-center justify-between">
         <div class="flex items-center text-white mr-52">
           <img
-            src="logo_quitzone.png"
+            src="/logo_quitzone.png"
             class="fill-current absolue"
             width="400"
             height="520"
