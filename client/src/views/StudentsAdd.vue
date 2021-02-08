@@ -1,6 +1,6 @@
 <template>
   <div class="px-5">
-    <a href="/classrooms">🔙</a>
+    <button @click="back()">Indietro</button>
     <div v-for="field in fields" :key="field.name">
       <div class="grid grid-cols-3 col-gap-5 mb-4">
         <label class="font-bold" :for="field.name">{{ field.label }}</label>
@@ -31,8 +31,6 @@
   </div>
 </template>
 <script>
-import axios from "axios";
-
 export default {
   name: "StudentsAdd",
   data() {
@@ -44,28 +42,33 @@ export default {
         name: null,
         surname: null,
         cf: null,
-        classroom_id: this.$route.params.id
+        classroom_id: this.$route.params.id,
       },
       fields: [
         {
           label: "Nome",
           name: "name",
-          type: "text"
+          type: "text",
         },
         {
           label: "Cognome",
           name: "surname",
-          type: "text"
+          type: "text",
         },
         {
           label: "Codice Fiscale",
           name: "cf",
-          type: "text"
+          type: "text",
         },
       ],
     };
   },
   methods: {
+    back() {
+      this.$router.push({
+        name: "classrooms_view",
+      });
+    },
     async createStudent() {
       this.error = null;
       this.success = null;
@@ -77,7 +80,7 @@ export default {
         );
         console.log(response);
         this.$router.push({
-          name: "classrooms_view"
+          name: "classrooms_view",
         });
 
         this.success = true;
@@ -97,11 +100,9 @@ export default {
 
         this.error += ", cazzo.";
       }
-    }
-  
-},
-mounted() {
-},
+    },
+  },
+  mounted() {},
   computed: {
     studentIsValid() {
       return (
@@ -109,8 +110,8 @@ mounted() {
         !!this.newStudentTemplate.surname &&
         !!this.newStudentTemplate.cf
       );
-    }
-  }
+    },
+  },
 };
 </script>
 

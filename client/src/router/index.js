@@ -26,9 +26,9 @@ const routes = [
     component: Login,
   },
   {
-    path: '/students',
+    path: '/classroom/view/:id/students',
     name: 'students',
-    component: Students,    
+    component: Students,
     children: [
       {
         path: 'add/:id',
@@ -47,56 +47,56 @@ const routes = [
     path: "/",
     component: Main,
     children: [
-    {
-      path: 'home',
-      name: 'Home',
-      component: Home,
-      meta:{
-        label: "Home",
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home,
+        meta: {
+          label: "Home",
+        },
       },
-    },
-    {
-      path: '/classrooms',
-      name: 'classrooms',
-      component: Classrooms,
-      meta:{
-        label:"Classrooms"
-      },    
-      children: [
-        {
-          path: 'list',
-          name: "classrooms_list",
-          component: ClassroomsList,
+      {
+        path: '/classrooms',
+        name: 'classrooms',
+        component: Classrooms,
+        meta: {
+          label: "Classrooms"
         },
-        {
-          path: 'view/:id',
-          name: "classrooms_view",
-          component: ClassroomsView,
-        },
-        {
-          path: 'add',
-          name: 'classrooms_add',
-          component: ClassroomsAdd,
-        },
-        {
-          path: 'edit/:id',
-          name: 'classrooms_edit',
-          component: ClassroomsEdit,
-        },
-        {
-          path: '',
-          redirect: 'list'
-        }
-      ] 
-    },
-    {
-      path: '*',
-      redirect: 'home'
-    },
-    {
-      path: '',
-      redirect: 'home'
-    },
+        children: [
+          {
+            path: 'list',
+            name: "classrooms_list",
+            component: ClassroomsList,
+          },
+          {
+            path: 'view/:id',
+            name: "classrooms_view",
+            component: ClassroomsView,
+          },
+          {
+            path: 'add',
+            name: 'classrooms_add',
+            component: ClassroomsAdd,
+          },
+          {
+            path: 'edit/:id',
+            name: 'classrooms_edit',
+            component: ClassroomsEdit,
+          },
+          {
+            path: '',
+            redirect: 'list'
+          }
+        ]
+      },
+      {
+        path: '*',
+        redirect: 'home'
+      },
+      {
+        path: '',
+        redirect: 'home'
+      },
     ]
   },
 ]

@@ -1,10 +1,14 @@
 <template>
   <div class="px-5">
-      <a href="/classrooms">🔙</a>
-      <div class="grid grid-cols-3 col-gap-5 mb-4">
-        <label class="font-bold">Nome classe</label>
-        <input v-model="classroom_name" type="text" class="col-span-2 border border-gray-400 rounded p-3"/>
-      </div>
+    <button @click="back()">Indietro</button>
+    <div class="grid grid-cols-3 col-gap-5 mb-4">
+      <label class="font-bold">Nome classe</label>
+      <input
+        v-model="classroom_name"
+        type="text"
+        class="col-span-2 border border-gray-400 rounded p-3"
+      />
+    </div>
     <div class="flex items-center">
       <span class="text-red-700 font-bold" v-if="error">
         {{ error }}
@@ -23,7 +27,6 @@
   </div>
 </template>
 <script>
-
 export default {
   name: "ClassroomsAdd",
   data() {
@@ -34,20 +37,22 @@ export default {
     };
   },
   methods: {
+    back() {
+      this.$router.push({
+        name: "classrooms_list",
+      });
+    },
     async createClassroom() {
       this.error = null;
       this.success = null;
 
       try {
-        let response = await this.$api.post(
-          "/classrooms/add",
-          {
-              "name": this.classroom_name
-          }
-        );
+        let response = await this.$api.post("/classrooms/add", {
+          name: this.classroom_name,
+        });
         console.log(response);
         this.$router.push({
-          name: "classrooms_list"
+          name: "classrooms_list",
         });
 
         this.success = true;
@@ -67,15 +72,12 @@ export default {
 
         this.error += ", cazzo.";
       }
-    }
-  
-},
+    },
+  },
   computed: {
     classroomIsValid() {
-      return (
-        !!this.classroom_name
-      );
-    }
-  }
+      return !!this.classroom_name;
+    },
+  },
 };
 </script>
