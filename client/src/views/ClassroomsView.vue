@@ -1,7 +1,6 @@
 <template>
 <div>
-  <div class="mx-80 flex flex-col justify-center">
-          <router-view></router-view>
+  <div class="mx-80 flex flex-col justify-center">        
     <a href="/classrooms">🔙</a>
     <div class="flex justify-between items-center">
        <h1 class="py-20 uppercase font-bold">{{ classroomName }}</h1>
@@ -23,6 +22,7 @@
         </tr>
       </table>
   </div>
+  <router-view></router-view>
 </div>
 </template>
 <script>
@@ -81,9 +81,6 @@ export default {
         name: "students_edit",
         params: {
           id: studentId,
-          name: studentName,
-          surname: studentSurname,
-          cf: studentCf
         },
       });
     },

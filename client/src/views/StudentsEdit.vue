@@ -38,7 +38,8 @@ export default {
           id: null,
           name: null,
           surname: null,
-          cf: null
+          cf: null,
+          classroom_id:null
       },
     };
   },
@@ -51,9 +52,11 @@ export default {
           "/students/edit",
             this.student
           );
-        console.log(response);
         this.$router.push({
-          name: "classrooms_view"
+          name: "classrooms_view",
+          params:{
+            id: this.student.classroom_id,
+          }
         });
 
         this.success = true;
@@ -78,7 +81,7 @@ export default {
     this.student.id = this.$route.params.id;
     let response = await this.$api.get(`/students/change/${this.student.id}`);
     this.student = response.data;
-    console.log(this.$route.params)
+    console.log(this.student.classroom_id);
   },
   computed: {
     studentIsValid() {

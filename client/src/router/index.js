@@ -26,11 +26,6 @@ const routes = [
     component: Login,
   },
   {
-    path: '/login',
-    name: 'Login',
-    component: Login,
-  },
-  {
     path: '/students',
     name: 'students',
     component: Students,    
@@ -44,6 +39,10 @@ const routes = [
         path: 'edit/:id',
         name: 'students_edit',
         component: StudentsEdit,
+      },
+    ],
+  },
+  {
     name: "main",
     path: "/",
     component: Main,
@@ -54,30 +53,35 @@ const routes = [
       component: Home,
       meta:{
         label: "Home",
-      }
+      },
     },
     {
-      path: 'students',
-      name: 'students',
-      component: Students,
-      meta: {
-        label: "Studenti",
-      },
+      path: '/classrooms',
+      name: 'classrooms',
+      component: Classrooms,
+      meta:{
+        label:"Classrooms"
+      },    
       children: [
         {
           path: 'list',
-          name: "students_list",
-          component: StudentsList,
+          name: "classrooms_list",
+          component: ClassroomsList,
         },
         {
-          path: 'create',
-          name: 'students_create',
-          component: StudentsCreate,
+          path: 'view/:id',
+          name: "classrooms_view",
+          component: ClassroomsView,
+        },
+        {
+          path: 'add',
+          name: 'classrooms_add',
+          component: ClassroomsAdd,
         },
         {
           path: 'edit/:id',
-          name: 'students_edit',
-          component: StudentsEdit,
+          name: 'classrooms_edit',
+          component: ClassroomsEdit,
         },
         {
           path: '',
@@ -86,12 +90,8 @@ const routes = [
       ] 
     },
     {
-      path: 'esami',
-      name: 'Esami',
-      component: StudentsEdit,
-      meta:{
-        label: "Esami",
-      }
+      path: '*',
+      redirect: 'home'
     },
     {
       path: '',
@@ -99,47 +99,7 @@ const routes = [
     },
     ]
   },
-  {
-    path: '/classrooms',
-    name: 'classrooms',
-    component: Classrooms,    
-    children: [
-      {
-        path: 'list',
-        name: "classrooms_list",
-        component: ClassroomsList,
-      },
-      {
-        path: 'view/:id',
-        name: "classrooms_view",
-        component: ClassroomsView,
-      },
-      {
-        path: 'add',
-        name: 'classrooms_add',
-        component: ClassroomsAdd,
-      },
-      {
-        path: 'edit/:id',
-        name: 'classrooms_edit',
-        component: ClassroomsEdit,
-      },
-      {
-        path: '',
-        redirect: 'list'
-      }
-    ] 
-  },
-  {
-    path: '*',
-    redirect: 'home'
-  },
-],
-    path: "*",
-    redirect: "/"
-  }
-
-];
+]
 
 const router = new VueRouter({
   mode: 'history',
