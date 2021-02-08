@@ -136,7 +136,7 @@ router.beforeEach((to, from, next) => {
 
   // Check if there are any meta data inside parent's routes
   if (to.matched.some(record => record.meta.roles)) {
-    console.log('ROLES TO CHECK');
+    // console.log('ROLES TO CHECK');
 
     var user = JSON.parse(localStorage.getItem('user'));
 
