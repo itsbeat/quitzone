@@ -111,7 +111,7 @@ export default {
 
         localStorage.setItem('user',JSON.stringify(response.data.logged_in_user));
 
-        this.$router.push("/");
+        this.$router.push(this.$route.query.redirect ? this.$route.query.redirect : '');
       } catch (error) {
         this.error = "Email o password errate. Riprova.";
       }

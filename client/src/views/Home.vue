@@ -1,7 +1,7 @@
 
 <template>
   <div class="home">
-    welcome
+    HOME
   </div>
 </template>
 

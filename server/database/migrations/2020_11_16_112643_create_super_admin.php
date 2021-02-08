@@ -19,7 +19,7 @@ class CreateSuperAdmin extends Migration
         $superAdmin->email = "superadmin";
         $superAdmin->password = Hash::make("password");
         $superAdmin->name = "superadmin";
-        
+        $superAdmin->role_id = 0;
         $superAdmin->save();
     }
 

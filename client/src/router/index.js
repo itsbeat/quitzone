@@ -19,6 +19,9 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login,
+    meta: {
+      requiresAuth: false,
+    }
   },
   {
     path: '/logout',
@@ -26,59 +29,55 @@ const routes = [
     component: Logout,
   },
   {
-    name: "main",
     path: "/",
+    name: "Main",
     component: Main,
     children: [
-    {
-      path: 'home',
-      name: 'Home',
-      component: Home,
-      meta:{
-        label: "Home",
-      }
-    },
-    {
-      path: 'students',
-      name: 'students',
-      component: Students,
-      meta: {
-        label: "Studenti",
-      },
-      children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: Home,
+        meta:
         {
-          path: 'list',
-          name: "students_list",
-          component: StudentsList,
-        },
-        {
-          path: 'create',
-          name: 'students_create',
-          component: StudentsCreate,
-        },
-        {
-          path: 'edit/:id',
-          name: 'students_edit',
-          component: StudentsEdit,
-        },
-        {
-          path: '',
-          redirect: 'list'
+          label: "Home",
+          requiresAuth: false,
         }
-      ] 
-    },
-    {
-      path: 'esami',
-      name: 'Esami',
-      component: StudentsEdit,
-      meta:{
-        label: "Esami",
-      }
-    },
-    {
-      path: '',
-      redirect: 'home'
-    },
+      },
+      {
+        path: '/students',
+        name: 'students',
+        component: Students,
+        meta: {
+          label: "Studenti",
+          requiresAuth: true,
+          roles: ['admin', 'student']
+        },
+        children: [
+          {
+            path: 'list',
+            name: "students_list",
+            component: StudentsList,
+          },
+          {
+            path: 'create',
+            name: 'students_create',
+            component: StudentsCreate,
+          },
+          {
+            path: 'edit/:id',
+            name: 'students_edit',
+            component: StudentsEdit,
+          },
+          {
+            path: '',
+            redirect: 'list'
+          }
+        ] 
+      },
+      {
+        path: '',
+        redirect: 'home'
+      },
     ]
   },
   {
@@ -97,6 +96,7 @@ const router = new VueRouter({
 // Auth based guard
 router.beforeEach((to, from, next) => {
 
+
   if (to.matched.some(record => record.meta.requiresAuth)) {
 
     // if route requires auth
@@ -110,7 +110,12 @@ router.beforeEach((to, from, next) => {
       // if user is not logged in
       // console.log('auth: NO, rilogga')
 
-      router.push('/login');
+      router.push({
+        name: 'Login',
+        query: {
+          redirect: to.path,
+        }
+      });
       next(false);
     }
   } else {
@@ -118,20 +123,28 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// Role based guard
+// Role based guard middleware
 router.beforeEach((to, from, next) => {
 
   // Check if there are any meta data inside parent's routes
   if (to.matched.some(record => record.meta.roles)) {
+    console.log('ROLES TO CHECK');
 
-    // console.log('you tried to enter in a role-based route: ',to.fullPath)
-    var user = localStorage.getItem('user');
+    var user = JSON.parse(localStorage.getItem('user'));
 
 
     // user check is required in the case requiresAuth is not defined 
     if (!user) {
-      router.push('/login')
+
+      // redirect user to login and set the redirect to to.path
+      router.push({
+        name: 'Login',
+        query: {
+          redirect: to.path,
+        }
+      });
       next(false)
+
     } else {
       var roleHolder = null
 
@@ -144,29 +157,46 @@ router.beforeEach((to, from, next) => {
         }
       }
 
+
       if (roleHolder != null && user != null) {
 
-        let userRole;
+        let userRole = user.role_id;
 
-        let userHasRole = roleHolder.indexOf(userRole) != -1
+
+        switch(userRole) {
+          case 0: userRole = 'admin'; break;
+          case 1: userRole = 'student'; break;
+          case 2: userRole = 'teacher'; break;
+          default: next(false);
+        }
+
+        let userHasRole = roleHolder.indexOf(userRole) != -1;
 
         if (userHasRole) {
-          next()
+
+          next();
+
         } else {
-          router.push('/login')
-          next(false)
+
+           // redirect user to login and set the redirect to to.path
+          router.push({
+            name: 'Login',
+            query: {
+              redirect: to.path,
+            }
+          });
+          next(false);
         }
       } else {
       // If no roles are provided, simply let the user in
-        next()
+        next();
       }
     }
 
-      
-    } else {
-      console.log('this is a open route');
-      next()
-    }
-  })
+  } else {
+    next()
+  }
+})
+
 
 export default router
