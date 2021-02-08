@@ -15,19 +15,19 @@ class CreateRoles extends Migration
     public function up()
     {
         $role = new Role();
-        $role->name = 'admin';
+        $role->name = 'Amministratore';
         $role->code = 'admin';
-        $role->color = '#00FF00';
+        $role->color = '#9803FC';
         $role->save();
 
         $role1 = new Role();
-        $role1->name = 'student';
+        $role1->name = 'Studente';
         $role1->code = 'student';
         $role1->color = '#00AEEF';
         $role1->save();
 
         $role2 = new Role();
-        $role2->name = 'teacher';
+        $role2->name = 'Docente';
         $role2->code = 'teacher';
         $role2->color = '#DC143C';
         $role2->save();
