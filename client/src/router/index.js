@@ -8,6 +8,8 @@ import StudentsList from '../views/StudentsList.vue';
 import StudentsEdit from '../views/StudentsEdit.vue';
 import Login from '../views/Login.vue';
 import Main from '../views/Main.vue';
+import HomePage from '../views/HomePage.vue';
+
 
 
 
@@ -67,6 +69,14 @@ const routes = [
       component: StudentsEdit,
       meta:{
         label: "Esami",
+      }
+    },
+    {
+      path: 'Homepage',
+      name: 'Homepage',
+      component: HomePage,
+      meta:{
+        label: "Homepage",
       }
     },
     {
