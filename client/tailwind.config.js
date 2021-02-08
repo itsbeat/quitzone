@@ -8,7 +8,7 @@ module.exports = {
         light:"#9c9c9c",
         dark:"#373F41",
       },
-      white:{
+      white: {
         normal:"#fff",
       },
     },
