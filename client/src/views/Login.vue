@@ -104,10 +104,11 @@ export default {
       this.error = null;
       this.isLoading = true;
       try {
-        await this.$api.post("/login", {
+        const res = await this.$api.post("/login", {
           email: this.email,
           password: this.password
         });
+        localStorage.setItem('user', JSON.stringify(res.data.logged_in_user));
         this.$router.push("/");
       } catch (error) {
         this.error = "Email o password errate. Riprova.";

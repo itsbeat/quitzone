@@ -1,69 +1,63 @@
 <template>
-    <div>
-        <pre>{{ user }}</pre>
-        <div v-for="field in fields" :key="field.name">
-              <div class="grid grid-cols-3 col-gap-5 mb-4">
-                <label class="font-bold" :for="field.name">{{ field.label }}</label>
-                <input
-                  v-model="editUserTemplate[field.name]"
-                  class="col-span-2 border border-gray-400 rounded p-3"
-                />
-              </div>
+  <div>
+    
+
+    <div class="h-full mt-24">
+ 
+      <div class="block md:flex">
+
+        <div class="w-full md:w-2/5 p-4 sm:p-6 lg:p-8 bg-white shadow-md">
+          <div class="flex justify-between">
+            <span class="text-xl font-semibold block">Profilo</span>
+            <button
+              @click="goToEdit()" 
+              class="-mt-2 text-md font-bold text-white bg-gray-700 rounded-full px-5 py-2 hover:bg-gray-800">
+                Modifica
+            </button>
+          </div>
+          <div class="flex flex-wrap justify-center">
+            <div class="w-6/12 sm:w-4/12 px-4">
+              <img src="https://demos.creative-tim.com/tailwindcss-starter-project/_next/static/images/team-2-800x800-3e08ef145920c93bbe320add0d2ef58d.jpg" alt="..." class="shadow rounded-full max-w-full h-auto align-middle border-none" />
+            </div>
+          </div>
+
         </div>
-        <div class="flex items-center">
-          <!-- <span class="text-red-700 font-bold" v-if="error">
-            {{ error }}
-          </span>
-          <span class="text-green-700 font-bold" v-if="success">
-            Utente creato con successo
-          </span> -->
-          <button
-            @click="editUser()"
-            class="rounded my-3 ml-auto px-3 p-2 bg-green-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
-          >
-            Invia
-          </button>
+    
+      <div class="w-full md:w-3/5 p-8 bg-white lg:ml-4 shadow-md">
+
+        <div class="rounded shadow p-6">
+
+          <div class="pb-6">
+            <label for="name" class="font-semibold text-gray-700 block pb-1">Name</label>
+            <div class="border-1 rounded-r px-4 py-2 w-full"/>
+              {{user.name}}
+            </div>
+            <label for="about" class="font-semibold text-gray-700 block pb-1">Email</label>
+            <div class="border-1 rounded-r px-4 py-2 w-full"/>
+              {{user.email}}
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  
 </template>
 <script>
 
 export default {
-  name: "students_edit",
+  name: "Profile",
   data() {
     return {
-      userId: null,
       user: null,
-      editUserTemplate: {
-        name: null,
-        email: null
-      },
-      fields: [
-        {
-          label: "Nome",
-          name: "name",
-          type: "text"
-        },
-        {
-          label: "Email",
-          name: "email",
-          type: "email"
-        }
-      ],
     };
   },
   methods: {
-    async editUser() {
-        let response = await this.$api.put('/users/' + this.userId, this.editUserTemplate);
-        console.log(response);
+    async goToEdit() {
+        this.$router.push("/profile/edit");
     }
   },
   async mounted() {
-    this.userId = this.$route.params.id;
-    let response = await this.$api.get(`/users/${this.userId}`);
-    this.user = response.data; 
-    this.editUserTemplate.name = this.user.name;
-    this.editUserTemplate.email = this.user.email;
+    this.user = JSON.parse(localStorage.getItem("user"));
   }
 };
 </script>

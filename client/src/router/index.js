@@ -47,13 +47,6 @@ const routes = [
         },
       ]
     },
-    {
-      path: 'students',
-      name: 'students',
-      component: Students,
-      meta: {
-        label: "Studenti",
-      },
       {
         path: 'students',
         name: 'students',
