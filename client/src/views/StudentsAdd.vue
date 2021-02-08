@@ -1,13 +1,18 @@
 <template>
   <div class="px-5">
-    <pre>
-      {{ newUserTemplate }}
-    </pre>
+    <div class="flex justify-start">
+      <button 
+        @click="back()"
+        class="flex items-center justify-center border border-transparent text-base font-medium rounded-md text-white bg-indigo-700 hover:bg-indigo-200 hover:text-indigo-700 md:py-2 md:text-lg md:px-4 mt-5"
+      >
+        Indietro
+      </button>
+    </div>
     <div v-for="field in fields" :key="field.name">
       <div class="grid grid-cols-3 col-gap-5 mb-4">
         <label class="font-bold" :for="field.name">{{ field.label }}</label>
         <input
-          v-model="newUserTemplate[field.name]"
+          v-model="newStudentTemplate[field.name]"
           class="col-span-2 border border-gray-400 rounded p-3"
           :id="field.name"
           :type="field.type"
@@ -20,12 +25,12 @@
         {{ error }}
       </span>
       <span class="text-green-700 font-bold" v-if="success">
-        Utente creato con successo
+        Studente creato con successo
       </span>
       <button
-        @click="createUser()"
-        :disabled="!userIsValid"
-        class="rounded my-3 ml-auto px-3 p-2 bg-green-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
+        @click="createStudent()"
+        :disabled="!studentIsValid"
+        class="rounded my-3 ml-auto px-3 p-2 bg-indigo-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Invia
       </button>
@@ -33,54 +38,56 @@
   </div>
 </template>
 <script>
-
 export default {
-  name: "StudentRegister",
+  name: "StudentsAdd",
   data() {
     return {
-      newUserTemplate: {
+      success: null,
+      error: null,
+      classroomId: null,
+      newStudentTemplate: {
         name: null,
         surname: null,
-        email: null,
-        password:null,
+        cf: null,
+        classroom_id: this.$route.params.id,
       },
       fields: [
         {
           label: "Nome",
           name: "name",
-          type: "text"
+          type: "text",
         },
         {
           label: "Cognome",
           name: "surname",
-          type: "text"
+          type: "text",
         },
         {
-          label: "Email",
-          name: "email",
-          type: "email"
+          label: "Codice Fiscale",
+          name: "cf",
+          type: "text",
         },
-        {
-          label: "Password",
-          name: "password",
-          type: "password"
-        }
       ],
-      success: null,
-      error: null
     };
   },
   methods: {
-    async createUser() {
+    back() {
+      this.$router.push({
+        name: "classrooms_view",
+      });
+    },
+    async createStudent() {
       this.error = null;
       this.success = null;
 
       try {
-        let response = await this.$api.post('/users', this.newUserTemplate);
-
+        let response = await this.$api.post(
+          "/students/add",
+          this.newStudentTemplate
+        );
         console.log(response);
         this.$router.push({
-          name: "its_list"
+          name: "classrooms_view",
         });
 
         this.success = true;
@@ -100,16 +107,18 @@ export default {
 
         this.error += ", cazzo.";
       }
-    }
+    },
   },
+  mounted() {},
   computed: {
-    userIsValid() {
+    studentIsValid() {
       return (
-        !!this.newUserTemplate.name &&
-        !!this.newUserTemplate.surname &&
-        !!this.newUserTemplate.email
+        !!this.newStudentTemplate.name &&
+        !!this.newStudentTemplate.surname &&
+        !!this.newStudentTemplate.cf
       );
-    }
-  }
+    },
+  },
 };
 </script>
+

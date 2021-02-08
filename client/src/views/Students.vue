@@ -1,6 +1,6 @@
 <template>
   <div>
-     <router-view></router-view>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
   },
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 <style></style>

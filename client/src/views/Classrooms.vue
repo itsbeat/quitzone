@@ -1,19 +1,18 @@
 <template>
   <div>
-     <router-view></router-view>
-     Ehi, StudentsCreate!
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 export default {
-  name: "StudentsCreate",
+  name: "Classrooms",
   data() {
     return {};
   },
   mounted() {},
   methods: {},
-  computed: {}
+  computed: {},
 };
 </script>
 <style></style>

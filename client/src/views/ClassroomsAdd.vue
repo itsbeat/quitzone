@@ -9,21 +9,9 @@
       </button>
     </div>
     <div class="grid grid-cols-3 col-gap-5 mb-4">
-      <label class="font-bold">Nome</label>
+      <label class="font-bold">Nome classe</label>
       <input
-        v-model="student.name"
-        type="text"
-        class="col-span-2 border border-gray-400 rounded p-3"
-      />
-      <label class="font-bold">Cognome</label>
-      <input
-        v-model="student.surname"
-        type="text"
-        class="col-span-2 border border-gray-400 rounded p-3"
-      />
-      <label class="font-bold">CF</label>
-      <input
-        v-model="student.cf"
+        v-model="classroom_name"
         type="text"
         class="col-span-2 border border-gray-400 rounded p-3"
       />
@@ -33,11 +21,11 @@
         {{ error }}
       </span>
       <span class="text-green-700 font-bold" v-if="success">
-        Studente modificata con successo
+        Classe creata con successo
       </span>
       <button
-        @click="editStudent()"
-        :disabled="!studentIsValid"
+        @click="createClassroom()"
+        :disabled="!classroomIsValid"
         class="rounded my-3 ml-auto px-3 p-2 bg-indigo-700 text-white disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
         Invia
@@ -47,35 +35,31 @@
 </template>
 <script>
 export default {
-  name: "studentEdit",
+  name: "ClassroomsAdd",
   data() {
     return {
       success: null,
       error: null,
-      student: {
-        id: null,
-        name: null,
-        surname: null,
-        cf: null,
-        classroom_id: null,
-      },
+      classroom_name: null,
     };
   },
   methods: {
     back() {
       this.$router.push({
-        name: "classrooms_view",
+        name: "classrooms_list",
       });
     },
+    async createClassroom() {
+      this.error = null;
+      this.success = null;
 
-    async editStudent() {
       try {
-        let response = await this.$api.put("/students/edit", this.student);
+        let response = await this.$api.post("/classrooms/add", {
+          name: this.classroom_name,
+        });
+        console.log(response);
         this.$router.push({
-          name: "classrooms_view",
-          params: {
-            id: this.student.classroom_id,
-          },
+          name: "classrooms_list",
         });
 
         this.success = true;
@@ -92,19 +76,14 @@ export default {
             this.error = e.response.data.message;
             break;
         }
+
         this.error += ", cazzo.";
       }
     },
   },
-  async mounted() {
-    this.student.id = this.$route.params.id;
-    let response = await this.$api.get(`/students/change/${this.student.id}`);
-    this.student = response.data;
-    console.log(this.student.classroom_id);
-  },
   computed: {
-    studentIsValid() {
-      return !!this.student.name, !!this.student.surname, !!this.student.cf;
+    classroomIsValid() {
+      return !!this.classroom_name;
     },
   },
 };
